@@ -1,19 +1,10 @@
 <resources>
-    <string name="app_name">FeekrForTV</string>
-    <string name="browse_title"><![CDATA[Videos by Your Company]]></string>
-    <string name="related_movies">Related Videos</string>
-    <string name="grid_view">Grid View</string>
-    <string name="error_fragment">Error Fragment</string>
-    <string name="personal_settings">Personal Settings</string>
-    <string name="watch_trailer_1">Watch trailer</string>
-    <string name="watch_trailer_2">FREE</string>
-    <string name="rent_1">Rent By Day</string>
-    <string name="rent_2">From $1.99</string>
-    <string name="buy_1">Buy and Own</string>
-    <string name="buy_2">AT $9.99</string>
-    <string name="movie">Movie</string>
+    <string name="app_name">Feekr</string>
 
-    <!-- Error messages -->
-    <string name="error_fragment_message">An error occurred</string>
-    <string name="dismiss_error">Dismiss</string>
+    <string name="setting_1">网络设置</string>
+    <string name="setting_2">蓝牙外设</string>
+    <string name="setting_3">梯形校正</string>
+    <string name="setting_4">文件管理</string>
+    <string name="setting_5">检查更新</string>
+    <string name="setting_6">系统设置</string>
 </resources>
