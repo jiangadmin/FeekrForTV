@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import com.jiang.tvlauncher.MyAPP;
 import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.entity.Const;
-import com.jiang.tvlauncher.entity.Point;
 import com.jiang.tvlauncher.entity.Save_Key;
 import com.jiang.tvlauncher.entity.TurnOnEntity;
 import com.jiang.tvlauncher.server.TimingService;
@@ -21,8 +20,6 @@ import com.jiang.tvlauncher.utils.SaveUtils;
 import com.jiang.tvlauncher.utils.Tools;
 import com.jiang.tvlauncher.utils.Wifi_APManager;
 import com.tencent.bugly.crashreport.CrashReport;
-import com.xgimi.business.api.clients.XgimiDeviceClient;
-import com.xgimi.business.api.enums.EnumProjectionMode;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -45,7 +42,7 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOnEntity> {
 
     public TurnOn_servlet(Context context) {
         this.context = context;
-        timeCount = new TimeCount(3000, 1000);
+//        timeCount = new TimeCount(3000, 1000);
     }
 
     @Override
@@ -156,38 +153,9 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOnEntity> {
 
                 LogUtil.e(TAG, "上电开机：" + directboot);
                 //上电开机开关
-                XgimiDeviceClient.setDirectBoot(directboot);
+//                XgimiDeviceClient.setDirectBoot(directboot);
 
-                //投影方式开关
-                if (shadowcnfBean.getProjectModeFlag() == 1) {
-                    switch (shadowcnfBean.getProjectMode()) {
-                        //正装正投
-                        case 0:
-                            XgimiDeviceClient.setProjectionMode(EnumProjectionMode.Front_Normal);
-                            break;
-                        //吊装正投
-                        case 1:
-                            XgimiDeviceClient.setProjectionMode(EnumProjectionMode.Front_Mirror);
-                            break;
-                        //正装背投
-                        case 2:
-                            XgimiDeviceClient.setProjectionMode(EnumProjectionMode.Reverse_Normal);
-                            break;
-                        //吊装背投
-                        case 3:
-                            XgimiDeviceClient.setProjectionMode(EnumProjectionMode.Reverse_Mirror);
-                            break;
-                    }
-                }
 
-                //梯形校正开关
-                if (shadowcnfBean.getZoomFlag() == 1) {
-                    //初始化梯形数据
-                    Point point = new Gson().fromJson(s, Point.class);
-
-                    new Set_Point_Asnc().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, point);
-
-                }
             }
 
             //启动定时服务

@@ -15,6 +15,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:onClick="onClick"
             android:id="@+id/setting_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -45,6 +46,7 @@
             android:layout_height="match_parent" />
 
         <LinearLayout
+            android:onClick="onClick"
             android:id="@+id/setting_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -72,7 +74,9 @@
             android:layout_width="0.5dp"
             android:background="@drawable/line_v1"
             android:layout_height="match_parent" />
+
         <LinearLayout
+            android:onClick="onClick"
             android:id="@+id/setting_3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -111,6 +115,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:onClick="onClick"
             android:id="@+id/setting_4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -141,6 +146,7 @@
             android:layout_height="match_parent" />
 
         <LinearLayout
+            android:onClick="onClick"
             android:id="@+id/setting_5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -171,6 +177,7 @@
             android:layout_height="match_parent" />
 
         <LinearLayout
+            android:onClick="onClick"
             android:id="@+id/setting_6"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -196,6 +203,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

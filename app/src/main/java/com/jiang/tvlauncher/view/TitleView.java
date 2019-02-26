@@ -55,21 +55,21 @@ public class TitleView extends RelativeLayout {
 
     public void initTitleView() {
         view = LayoutInflater.from(context).inflate(R.layout.titleview, this, true);
-        tvTime =  view.findViewById(R.id.title_bar_hour);
-        tvDate =  view.findViewById(R.id.title_bar_date);
-        imgNetWorkState =  view.findViewById(R.id.title_bar_network_state);
+        tvTime = view.findViewById(R.id.title_bar_hour);
+        tvDate = view.findViewById(R.id.title_bar_date);
+        imgNetWorkState = view.findViewById(R.id.title_bar_network_state);
         typeface = Typeface.createFromAsset(context.getAssets(), "helvetica_neueltpro_thex.otf");
         tvTime.setTypeface(typeface);
         tvDate.setTypeface(typeface);
         timeHandle.post(timeRun);
-        imgNetWorkState =  this.findViewById(R.id.title_bar_network_state);
+        imgNetWorkState = this.findViewById(R.id.title_bar_network_state);
 
         update();
 
     }
 
-    public void setTimeColor(String color){
-        if (tvTime!=null){
+    public void setTimeColor(String color) {
+        if (tvTime != null) {
             tvTime.setTextColor(Color.parseColor(color));
         }
     }
@@ -91,10 +91,8 @@ public class TitleView extends RelativeLayout {
                         imgNetWorkState.setImageDrawable(context.getResources().getDrawable(R.mipmap.wifi_1));
                     } else if (signalLevel == 1) {
                         imgNetWorkState.setImageDrawable(context.getResources().getDrawable(R.mipmap.wifi_2));
-
                     } else if (signalLevel == 2) {
                         imgNetWorkState.setImageDrawable(context.getResources().getDrawable(R.mipmap.wifi_3));
-
                     } else if (signalLevel == 3) {
                         imgNetWorkState.setImageDrawable(context.getResources().getDrawable(R.mipmap.network_state_on));
                     }
@@ -122,7 +120,7 @@ public class TitleView extends RelativeLayout {
      * 计时器
      */
     class TimeCount extends CountDownTimer {
-        public TimeCount(long millisInFuture, long countDownInterval) {
+        TimeCount(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);//参数依次为总时长,和计时的时间间隔
         }
 
@@ -137,6 +135,4 @@ public class TitleView extends RelativeLayout {
 
         }
     }
-
-
 }

@@ -14,8 +14,8 @@ import com.jiang.tvlauncher.BuildConfig;
  */
 public class Const {
 
-    public static String URL = BuildConfig.NetUrl;
-//    public static String URL = "http://testapi.feekrs.com/";
+//    public static String URL = BuildConfig.NetUrl;
+    public static String URL = "http://testapi.feekrs.com/";
 //    public static String URL = "http://api.tentrip.aisee.tv/";
 
     public static int Timing = 30;

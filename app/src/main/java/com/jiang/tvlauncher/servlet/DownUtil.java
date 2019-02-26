@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.os.RemoteException;
 import android.view.KeyEvent;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 import com.jiang.tvlauncher.MyAPP;
 import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.utils.LogUtil;
-import com.xgimi.business.api.clients.ApiProxyServiceClient;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -92,20 +90,7 @@ public class DownUtil {
                             //是极米设备
                             if (MyAPP.isxgimi) {
                                 //调用极米静默安装
-                                ApiProxyServiceClient.INSTANCE.binderAidlService(MyAPP.context, new ApiProxyServiceClient.IAidlConnectListener() {
-                                    @Override
-                                    public void onSuccess() {
-                                        LogUtil.e(TAG, "连接成功");
-                                        ApiProxyServiceClient.INSTANCE.silentInstallPackage(file.getPath(), null);
-                                        //释放资源
-                                        ApiProxyServiceClient.INSTANCE.release();
-                                    }
 
-                                    @Override
-                                    public void onFailure(RemoteException e) {
-
-                                    }
-                                });
 
                             } else {
                                 Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -117,22 +102,7 @@ public class DownUtil {
                         //如果是资源文件
                         if (fileName.contains(".zip")) {
                             LogUtil.e(TAG, "资源文件" + file.getPath());
-                            ApiProxyServiceClient.INSTANCE.binderAidlService(MyAPP.context, new ApiProxyServiceClient.IAidlConnectListener() {
-                                @Override
-                                public void onSuccess() {
-                                    LogUtil.e(TAG, "AIDL 连接成功");
-                                    //附上开机动画
-                                    ApiProxyServiceClient.INSTANCE.changeBootAnimation(file.getPath());
 
-                                    //释放资源
-                                    ApiProxyServiceClient.INSTANCE.release();
-                                }
-
-                                @Override
-                                public void onFailure(RemoteException e) {
-
-                                }
-                            });
 
                         }
                     } catch (Exception e) {

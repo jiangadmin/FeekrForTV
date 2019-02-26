@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.jiang.tvlauncher.R;
 import com.jiang.tvlauncher.activity.Home_Activity;
-import com.jiang.tvlauncher.activity.Launcher_Activity;
+
 import com.jiang.tvlauncher.entity.Save_Key;
 import com.jiang.tvlauncher.utils.SaveUtils;
 
@@ -108,10 +108,6 @@ public class PwdDialog extends Dialog {
                 if (password.equals(SaveUtils.getString(Save_Key.Password))) {
                     if (activity instanceof Home_Activity) {
                         ((Home_Activity) activity).PwdRe();
-                    }
-
-                    if (activity instanceof Launcher_Activity){
-                        ((Launcher_Activity)activity).PwdRe();
                     }
                 }
                 break;

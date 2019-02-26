@@ -7,13 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.IBinder;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 
 import com.TvTicketTool.TvTicketTool;
 import com.android.aidl.IUserInterfaceService;
 import com.jiang.tvlauncher.entity.Const;
-import com.jiang.tvlauncher.entity.Point;
 import com.jiang.tvlauncher.entity.Save_Key;
 import com.jiang.tvlauncher.servlet.TurnOn_servlet;
 import com.jiang.tvlauncher.servlet.VIPCallBack_Servlet;
@@ -42,7 +43,7 @@ import java.util.HashMap;
  */
 
 public class MyAPP extends Application implements KtcpPaySDKCallback {
-    private static final String TAG = "MyAppliaction";
+    private static final String TAG = "MyAPP";
     public static boolean LogShow = true;
     public static Context context;
 
@@ -54,7 +55,7 @@ public class MyAPP extends Application implements KtcpPaySDKCallback {
     public static int Temp = 0;
     public static int WindSpeed = 0;
     public static String turnType = "2";//开机类型 1 通电开机 2 手动开机
-    Point point;
+
     public static boolean TurnOnS = false;
 
     public static Activity activity;
@@ -79,16 +80,21 @@ public class MyAPP extends Application implements KtcpPaySDKCallback {
         LogUtil.e(TAG, "休眠时间：" + Tools.getScreenOffTime());
 
         SaveUtils.setBoolean(Save_Key.FristTurnOn, true);
-
+        SN = SystemProperties.get("ro.serialno");
+        LogUtil.e(TAG, "SN:" + SN);
+        LogUtil.e(TAG, "机器型号:" + SystemProperties.get("ro.product.model"));
+        LogUtil.e(TAG, "系统版本:" + SystemProperties.get("ro.build.version.incremental"));
+        LogUtil.e(TAG, "Android版本:" + SystemProperties.get("ro.build.version.release"));
 
         LogUtil.e(TAG, "准备连接AIDL");
         ComponentName componentName = new ComponentName("com.skygz.interfaces", "com.skygz.interfaces.SkyInterfaceCallService");
         bindService(new Intent().setComponent(componentName), serviceConnection, Context.BIND_AUTO_CREATE);
 
-
         //添加监听
         KtcpPaySdkProxy.getInstance().setPaySDKCallback(this);
 
+        LogUtil.e(TAG, Build.ID);
+        LogUtil.e(TAG, Build.MODEL);
 
         //开机请求
         new TurnOn_servlet(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -111,30 +117,9 @@ public class MyAPP extends Application implements KtcpPaySDKCallback {
             iUserInterfaceService = IUserInterfaceService.Stub.asInterface(iBinder);
 
             if (TurnOnS) {
-                return;
+
             }
-//            try {
-////                //电视/机顶盒机型号
-////                iUserInterfaceService.get("Model", null);
-////                ictvDeviceManager.getSTBData("SoftwareVersion", null);
-////                ictvDeviceManager.getSTBData("MAC", null);
-////                //设备SN
-////                SN = ictvDeviceManager.getSTBData("SN", null);
-////                ictvDeviceManager.getSTBData("GDID", null);
-////                ictvDeviceManager.getSTBData("sw", null);
-////                ictvDeviceManager.getSTBData("IC", null);
-////                ictvDeviceManager.getSTBData("OsVersion", null);
-////                ictvDeviceManager.getSTBData("BoardName", null);
-////                ictvDeviceManager.getSTBData("apprresult", null);
-////
-//                if (!TurnOnS) {
-//                    new TurnOn_servlet(context).execute();
-//                }
-//
-//            } catch (RemoteException e) {
-//                e.printStackTrace();
-//                LogUtil.e(TAG, "连接失败" + e.getMessage());
-//            }
+
         }
 
         //断开服务的时候

@@ -21,10 +21,7 @@ import com.jiang.tvlauncher.servlet.Update_Servlet;
 import com.jiang.tvlauncher.utils.FileUtils;
 import com.jiang.tvlauncher.utils.LogUtil;
 import com.jiang.tvlauncher.utils.Tools;
-import com.lgeek.tv.jimi.LgeekTVSdkMrg;
 import com.tencent.bugly.crashreport.CrashReport;
-import com.xgimi.business.api.clients.XgimiDeviceClient;
-import com.xgimi.business.api.enums.EnumSettingsActivity;
 
 import java.io.File;
 
@@ -117,13 +114,12 @@ public class Setting_Activity extends Base_Activity implements View.OnClickListe
                     //启动到有线连接页面
                     startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
                 else
-                    //启动到无线连接页面
-                    XgimiDeviceClient.startSettingsActivity(this, EnumSettingsActivity.WIFIActivity);
+                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+
                 break;
             //蓝牙设置
             case R.id.setting_2:
-                LgeekTVSdkMrg.getInstance().init(this);
-                LgeekTVSdkMrg.getInstance().openSettings();
+
                 break;
             //梯形校正
             case R.id.setting_3:
@@ -145,7 +141,7 @@ public class Setting_Activity extends Base_Activity implements View.OnClickListe
                 break;
             //关于本机
             case R.id.setting_6:
-                startActivity(new Intent().setAction(EnumSettingsActivity.Main.getActionName()));
+                startActivity(new Intent(Settings.ACTION_SETTINGS));
                 break;
         }
     }
