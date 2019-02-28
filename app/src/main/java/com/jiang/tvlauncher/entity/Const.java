@@ -1,8 +1,7 @@
 package com.jiang.tvlauncher.entity;
 
-import android.os.Environment;
-
 import com.jiang.tvlauncher.BuildConfig;
+import com.jiang.tvlauncher.MyAPP;
 
 /**
  * Created by  jiang
@@ -51,6 +50,7 @@ public class Const {
     /**
      * 存储位置
      */
-    public static String FilePath = Environment.getExternalStorageDirectory().getPath() + "/feekr/Download/";
+//    public static String FilePath = Environment.getExternalStorageDirectory().getPath() + "/feekr/Download/";
+    public static String FilePath = MyAPP.context.getFilesDir().getPath();
 
 }

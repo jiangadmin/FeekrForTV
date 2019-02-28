@@ -2,8 +2,6 @@ package com.jiang.tvlauncher.servlet;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.WindowManager;
@@ -12,6 +10,7 @@ import android.widget.Toast;
 import com.jiang.tvlauncher.MyAPP;
 import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.utils.LogUtil;
+import com.jiang.tvlauncher.utils.SilentInstall;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -87,22 +86,12 @@ public class DownUtil {
                         if (fileName.contains(".apk")) {
                             LogUtil.e(TAG, "安装包");
 
-                            //是极米设备
-                            if (MyAPP.isxgimi) {
-                                //调用极米静默安装
-
-
-                            } else {
-                                Intent intent = new Intent(Intent.ACTION_VIEW);
-                                intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-                                MyAPP.activity.startActivity(intent);
-                            }
+                            new SilentInstall().install(file.getPath());
 
                         }
                         //如果是资源文件
                         if (fileName.contains(".zip")) {
                             LogUtil.e(TAG, "资源文件" + file.getPath());
-
 
                         }
                     } catch (Exception e) {
