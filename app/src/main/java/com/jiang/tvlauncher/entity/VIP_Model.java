@@ -7,7 +7,7 @@ package com.jiang.tvlauncher.entity;
  * @Phone: 186 6120 1018
  * TODO:
  */
-public class VIP_Entity extends BaseEntity {
+public class VIP_Model extends Base_Model {
 
     /**
      * errorcode : 1000

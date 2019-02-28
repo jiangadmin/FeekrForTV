@@ -8,7 +8,7 @@ package com.jiang.tvlauncher.entity;
  * Purpose:TODO 更新
  * update：
  */
-public class UpdateEntity extends BaseEntity {
+public class Update_Model extends Base_Model {
 
     /**
      * errorcode : 1000

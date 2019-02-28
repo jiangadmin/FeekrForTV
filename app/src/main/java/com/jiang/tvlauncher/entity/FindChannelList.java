@@ -6,7 +6,7 @@ import java.util.List;
  * Created by wwwfa on 2017/8/17.
  */
 
-public class FindChannelList extends BaseEntity {
+public class FindChannelList extends Base_Model {
     private static final String TAG = "FindChannelList";
 
     /**

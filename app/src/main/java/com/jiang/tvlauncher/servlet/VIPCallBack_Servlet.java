@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.jiang.tvlauncher.MyAPP;
-import com.jiang.tvlauncher.entity.BaseEntity;
+import com.jiang.tvlauncher.entity.Base_Model;
 import com.jiang.tvlauncher.entity.Const;
 import com.jiang.tvlauncher.utils.HttpUtil;
 import com.jiang.tvlauncher.utils.LogUtil;
@@ -20,11 +20,11 @@ import java.util.Map;
  * @Phone: 186 6120 1018
  * TODO: 会员登录返回
  */
-public class VIPCallBack_Servlet extends AsyncTask<VIPCallBack_Servlet.TencentVip, Integer, BaseEntity> {
+public class VIPCallBack_Servlet extends AsyncTask<VIPCallBack_Servlet.TencentVip, Integer, Base_Model> {
     private static final String TAG = "VIPCallBack_Servlet";
 
     @Override
-    protected BaseEntity doInBackground(TencentVip... tencentVips) {
+    protected Base_Model doInBackground(TencentVip... tencentVips) {
         TencentVip vip = tencentVips[0];
         Map map = new HashMap();
         map.put("vuid", Const.ktcp_vuid);
@@ -36,16 +36,16 @@ public class VIPCallBack_Servlet extends AsyncTask<VIPCallBack_Servlet.TencentVi
 
         String res = HttpUtil.doPost(Const.URL + "tencent/tencentVideoController/tencentNoticeCallBack.do", map);
 
-        BaseEntity entity;
+        Base_Model entity;
         if (TextUtils.isEmpty(res)) {
-            entity = new BaseEntity();
+            entity = new Base_Model();
             entity.setErrorcode(-1);
             entity.setErrormsg("连接服务器失败");
         } else {
             try {
-                entity = new Gson().fromJson(res, BaseEntity.class);
+                entity = new Gson().fromJson(res, Base_Model.class);
             } catch (Exception e) {
-                entity = new BaseEntity();
+                entity = new Base_Model();
                 entity.setErrormsg("数据解析失败");
                 entity.setErrorcode(-2);
                 LogUtil.e(TAG, e.getMessage());
@@ -55,7 +55,7 @@ public class VIPCallBack_Servlet extends AsyncTask<VIPCallBack_Servlet.TencentVi
     }
 
     @Override
-    protected void onPostExecute(BaseEntity entity) {
+    protected void onPostExecute(Base_Model entity) {
         super.onPostExecute(entity);
         if (entity.getErrorcode() == 1000) {
 

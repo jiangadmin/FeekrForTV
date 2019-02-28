@@ -10,7 +10,7 @@ import com.jiang.tvlauncher.MyAPP;
 import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.entity.Const;
 import com.jiang.tvlauncher.entity.Save_Key;
-import com.jiang.tvlauncher.entity.VIP_Entity;
+import com.jiang.tvlauncher.entity.VIP_Model;
 import com.jiang.tvlauncher.utils.HttpUtil;
 import com.jiang.tvlauncher.utils.LogUtil;
 import com.jiang.tvlauncher.utils.SaveUtils;
@@ -27,7 +27,7 @@ import java.util.Map;
  * @Phone: 186 6120 1018
  * TODO: 获取会员账号
  */
-public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Entity> {
+public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Model> {
     private static final String TAG = "GetVIP_Servlet";
 
     boolean IsOpen = true;
@@ -37,14 +37,14 @@ public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Entity> {
     }
 
     @Override
-    protected VIP_Entity doInBackground(String... strings) {
+    protected VIP_Model doInBackground(String... strings) {
         Map map = new HashMap();
-        VIP_Entity entity;
+        VIP_Model entity;
         if (!TextUtils.isEmpty(MyAPP.SN)) {
             map.put("serialNum", MyAPP.SN);
             map.put("mac", Tools.getMacAddress());
         } else {
-            entity = new VIP_Entity();
+            entity = new VIP_Model();
             entity.setErrorcode(-3);
             entity.setErrormsg("数据缺失");
         }
@@ -57,14 +57,14 @@ public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Entity> {
         }
 
         if (TextUtils.isEmpty(res)) {
-            entity = new VIP_Entity();
+            entity = new VIP_Model();
             entity.setErrorcode(-1);
             entity.setErrormsg("连接服务器失败");
         } else {
             try {
-                entity = new Gson().fromJson(res, VIP_Entity.class);
+                entity = new Gson().fromJson(res, VIP_Model.class);
             } catch (Exception e) {
-                entity = new VIP_Entity();
+                entity = new VIP_Model();
                 entity.setErrorcode(-2);
                 entity.setErrormsg("数据解析失败");
                 LogUtil.e(TAG, e.getMessage());
@@ -74,7 +74,7 @@ public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Entity> {
     }
 
     @Override
-    protected void onPostExecute(VIP_Entity entity) {
+    protected void onPostExecute(VIP_Model entity) {
         super.onPostExecute(entity);
         Loading.dismiss();
 

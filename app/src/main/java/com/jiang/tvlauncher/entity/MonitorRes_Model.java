@@ -4,7 +4,7 @@ package com.jiang.tvlauncher.entity;
  * Created by wwwfa on 2017/8/9.
  */
 
-public class MonitorResEntity extends BaseEntity {
+public class MonitorRes_Model extends Base_Model {
 
     /**
      * errorcode : 1000

@@ -4,7 +4,7 @@ package com.jiang.tvlauncher.entity;
  * Created by wwwfa on 2017/8/9.
  */
 
-public class TurnOnEntity extends BaseEntity {
+public class TurnOn_Model extends Base_Model {
 
     /**
      * errorcode : 1000

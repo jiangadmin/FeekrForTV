@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
 
     signingConfigs {
@@ -17,12 +16,20 @@ android {
     }
 
     compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
     defaultConfig {
         applicationId "com.jiang.tvlauncher"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 150
+        versionName "1.5.0"
+        signingConfig signingConfigs.jiang
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
     }
 
 
@@ -33,7 +40,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.jiang
         }
-        tencent{
+        tencent {
             minifyEnabled false
             buildConfigField "String", "NetUrl", "\"http://api.tentrip.aisee.tv/\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -53,21 +60,24 @@ android {
         abortOnError false
     }
 }
-
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
-
-    //    implementation 'com.android.support:leanback-v17:28.0.0'
+    //Loading 图
     implementation 'com.wang.avi:library:2.1.3'
+    //自动解析
     implementation 'com.google.code.gson:gson:2.8.4'
-    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
-//    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.8'
+    //bugly 错误回收
     implementation 'com.tencent.bugly:crashreport:2.6.6.1'
-    //EVENTbus
+    //eventbus 消息分发
     implementation 'org.greenrobot:eventbus:3.1.1'
     //Gilde图片加载库
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     //腾讯
     implementation files('libs/thirdagent-2.0.0.jar')
+    implementation files('libs/classes-full-debug.jar')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+}
+
+repositories {
+    flatDir { dirs 'libs' }
 }

@@ -8,7 +8,7 @@ import com.jiang.tvlauncher.MyAPP;
 import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.entity.Const;
 import com.jiang.tvlauncher.entity.Save_Key;
-import com.jiang.tvlauncher.entity.Theme_Entity;
+import com.jiang.tvlauncher.entity.Theme_Model;
 import com.jiang.tvlauncher.utils.HttpUtil;
 import com.jiang.tvlauncher.utils.LogUtil;
 import com.jiang.tvlauncher.utils.SaveUtils;
@@ -25,13 +25,13 @@ import java.util.Map;
  * @Phone: 186 6120 1018
  * TODO: 获取显示主题
  */
-public class Get_Theme_Servlet extends AsyncTask<String, Integer, Theme_Entity> {
+public class Get_Theme_Servlet extends AsyncTask<String, Integer, Theme_Model> {
     private static final String TAG = "Get_Theme_Servlet";
 
     String res;
 
     @Override
-    protected Theme_Entity doInBackground(String... strings) {
+    protected Theme_Model doInBackground(String... strings) {
         Map map = new HashMap();
 
         map.put("serialNum", MyAPP.SN);
@@ -39,17 +39,17 @@ public class Get_Theme_Servlet extends AsyncTask<String, Integer, Theme_Entity> 
 
         res = HttpUtil.doPost(Const.URL + "cms/themeController/findLauncherTheme.do", map);
 
-        Theme_Entity entity;
+        Theme_Model entity;
 
         if (TextUtils.isEmpty(res)) {
-            entity = new Theme_Entity();
+            entity = new Theme_Model();
             entity.setErrorcode(-1);
             entity.setErrormsg("连接服务器失败");
         } else {
             try {
-                entity = new Gson().fromJson(res, Theme_Entity.class);
+                entity = new Gson().fromJson(res, Theme_Model.class);
             } catch (Exception e) {
-                entity = new Theme_Entity();
+                entity = new Theme_Model();
                 entity.setErrorcode(-2);
                 entity.setErrormsg("数据解析失败");
                 LogUtil.e(TAG, e.getMessage());
@@ -59,7 +59,7 @@ public class Get_Theme_Servlet extends AsyncTask<String, Integer, Theme_Entity> 
     }
 
     @Override
-    protected void onPostExecute(Theme_Entity entity) {
+    protected void onPostExecute(Theme_Model entity) {
         super.onPostExecute(entity);
 
         Loading.dismiss();

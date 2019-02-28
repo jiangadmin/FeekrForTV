@@ -64,9 +64,9 @@ public class AppAdapter extends BaseAdapter {
         if (convertView == null) {
             mHolder = new Holder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_app, null);
-            mHolder.name =  convertView.findViewById(R.id.item_app_name);
-            mHolder.packagename =  convertView.findViewById(R.id.item_app_package_name);
-            mHolder.icon =  convertView.findViewById(R.id.item_app_icon);
+            mHolder.name = (TextView) convertView.findViewById(R.id.item_app_name);
+            mHolder.packagename = (TextView) convertView.findViewById(R.id.item_app_package_name);
+            mHolder.icon = (ImageView) convertView.findViewById(R.id.item_app_icon);
             mHolder.bg = convertView.findViewById(R.id.item_app_bg);
             convertView.setTag(mHolder);
         } else {
@@ -79,7 +79,7 @@ public class AppAdapter extends BaseAdapter {
         mHolder.name.setText(appBean.getName());
 //        mHolder.packagename.setText(appBean.getPackageName());
 
-        LogUtil.e(TAG,">>>>>>>>>> "+position+" <<<<<<<<<<");
+        LogUtil.e(TAG, ">>>>>>>>>> " + position + " <<<<<<<<<<");
         LogUtil.e(TAG, "路  径：   " + appBean.getDataDir());
         LogUtil.e(TAG, "主页名：  " + appBean.getLauncherName());
         LogUtil.e(TAG, "软件名：  " + appBean.getName());

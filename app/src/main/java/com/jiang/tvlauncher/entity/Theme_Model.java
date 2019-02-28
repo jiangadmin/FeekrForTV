@@ -7,7 +7,7 @@ package com.jiang.tvlauncher.entity;
  * @Phone: 186 6120 1018
  * TODO: 主题
  */
-public class Theme_Entity extends BaseEntity {
+public class Theme_Model extends Base_Model {
 
     /**
      * errorcode : 1000

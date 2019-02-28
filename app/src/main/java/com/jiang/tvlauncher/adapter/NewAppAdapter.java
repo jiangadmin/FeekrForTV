@@ -59,9 +59,9 @@ public class NewAppAdapter extends BaseAdapter {
         if (convertView == null) {
             mHolder = new Holder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_app, null);
-            mHolder.name =  convertView.findViewById(R.id.item_app_name);
-            mHolder.packagename =  convertView.findViewById(R.id.item_app_package_name);
-            mHolder.icon =  convertView.findViewById(R.id.item_app_icon);
+            mHolder.name = (TextView) convertView.findViewById(R.id.item_app_name);
+            mHolder.packagename = (TextView) convertView.findViewById(R.id.item_app_package_name);
+            mHolder.icon = (ImageView) convertView.findViewById(R.id.item_app_icon);
             mHolder.bg = convertView.findViewById(R.id.item_app_bg);
             convertView.setTag(mHolder);
         } else {

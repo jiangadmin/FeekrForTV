@@ -48,7 +48,7 @@ public class MyAPP extends Application implements KtcpPaySDKCallback {
     public static Context context;
 
     public static boolean IsLineNet = true;//是否是有线网络
-    public static String modelNum = "Z6X";
+    public static String Model = "";
     public static String ID = "";
     public static String SN = "";
     //    public static String SN = "EKJ9J517DXBJ";
@@ -80,9 +80,12 @@ public class MyAPP extends Application implements KtcpPaySDKCallback {
         LogUtil.e(TAG, "休眠时间：" + Tools.getScreenOffTime());
 
         SaveUtils.setBoolean(Save_Key.FristTurnOn, true);
+
         SN = SystemProperties.get("ro.serialno");
+        Model = SystemProperties.get("ro.product.model");
+
         LogUtil.e(TAG, "SN:" + SN);
-        LogUtil.e(TAG, "机器型号:" + SystemProperties.get("ro.product.model"));
+        LogUtil.e(TAG, "机器型号:" + Model);
         LogUtil.e(TAG, "系统版本:" + SystemProperties.get("ro.build.version.incremental"));
         LogUtil.e(TAG, "Android版本:" + SystemProperties.get("ro.build.version.release"));
 

@@ -16,7 +16,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -26,7 +25,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -43,7 +41,7 @@ import com.jiang.tvlauncher.dialog.PwdDialog;
 import com.jiang.tvlauncher.entity.Const;
 import com.jiang.tvlauncher.entity.FindChannelList;
 import com.jiang.tvlauncher.entity.Save_Key;
-import com.jiang.tvlauncher.entity.Theme_Entity;
+import com.jiang.tvlauncher.entity.Theme_Model;
 import com.jiang.tvlauncher.receiver.NetReceiver;
 import com.jiang.tvlauncher.servlet.DownUtil;
 import com.jiang.tvlauncher.servlet.FindChannelList_Servlet;
@@ -78,7 +76,7 @@ import java.util.Objects;
  */
 
 public class Home_Activity extends Base_Activity implements View.OnClickListener, View.OnFocusChangeListener {
-    private static final String TAG = "Home_Activity";
+    private static final String TAG = "Launcher_Activity";
 
     ImageView main_bg, main_bg_0;
     TextView title_0, title, title_2;
@@ -88,7 +86,6 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
     TextView setting_txt;
 
     LinearLayout title_view;
-    RelativeLayout load;
 
     TitleView titleview;
 
@@ -117,7 +114,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
     private static ApproveDeviceManager approveDeviceManager;
 
     NetReceiver netReceiver;
-    private static boolean nanchuanAuthFlag = false;       //南传认证标识，false=未认证，true=已认证
+    public static boolean nanchuanAuthFlag = false;       //南传认证标识，false=未认证，true=已认证
     private static boolean NanChuan_Ok = true;             //南传认证结果 false = 认证失败,true=认证成功
 
     @Override
@@ -143,6 +140,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
         if (!Tools.isNetworkConnected()) {
             NetDialog.showL();
         }
+
         onMessage("update");
 
         //首先显示本地资源
@@ -151,7 +149,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
         }
         //首先显示本地资源
         if (!TextUtils.isEmpty(SaveUtils.getString(Save_Key.Theme))) {
-            onMessage(new Gson().fromJson(SaveUtils.getString(Save_Key.Theme), Theme_Entity.class));
+            onMessage(new Gson().fromJson(SaveUtils.getString(Save_Key.Theme), Theme_Model.class));
         }
     }
 
@@ -209,18 +207,15 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
                 break;
 
             case "update":
-                //南传认证
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        nanchuan();
-                    }
-                }, 1000);
+
                 //检查更新
                 new Update_Servlet(this).execute();
                 //查询栏目
                 new FindChannelList_Servlet().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 //获取主题
                 new Get_Theme_Servlet().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+                nanchuan();
                 break;
 
             case "nanchuan":
@@ -233,31 +228,31 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
 
     private void initview() {
 
-        main_bg = findViewById(R.id.main_bg);
-        main_bg_0 = findViewById(R.id.main_bg_0);
-        title_view = findViewById(R.id.title_view);
-        title_icon = findViewById(R.id.title_icon);
-        title_0 = findViewById(R.id.title_0);
-        title = findViewById(R.id.title);
-        title_2 = findViewById(R.id.title_2);
+        main_bg = (ImageView) findViewById(R.id.main_bg);
+        main_bg_0 = (ImageView) findViewById(R.id.main_bg_0);
+        title_view = (LinearLayout) findViewById(R.id.title_view);
+        title_icon = (ImageView) findViewById(R.id.title_icon);
+        title_0 = (TextView) findViewById(R.id.title_0);
+        title = (TextView) findViewById(R.id.title);
+        title_2 = (TextView) findViewById(R.id.title_2);
 
-        home1 = findViewById(R.id.home_1);
-        home2 = findViewById(R.id.home_2);
-        home3 = findViewById(R.id.home_3);
-        home4 = findViewById(R.id.home_4);
+        home1 = (ImageView) findViewById(R.id.home_1);
+        home2 = (ImageView) findViewById(R.id.home_2);
+        home3 = (ImageView) findViewById(R.id.home_3);
+        home4 = (ImageView) findViewById(R.id.home_4);
 
-        name1 = findViewById(R.id.home_1_name);
-        name2 = findViewById(R.id.home_2_name);
-        name3 = findViewById(R.id.home_3_name);
-        name4 = findViewById(R.id.home_4_name);
+        name1 = (TextView) findViewById(R.id.home_1_name);
+        name2 = (TextView) findViewById(R.id.home_2_name);
+        name3 = (TextView) findViewById(R.id.home_3_name);
+        name4 = (TextView) findViewById(R.id.home_4_name);
 
-        setting = findViewById(R.id.setting);
-        setting_img = findViewById(R.id.setting_img);
-        setting_txt = findViewById(R.id.setting_txt);
+        setting = (LinearLayout) findViewById(R.id.setting);
+        setting_img = (ImageView) findViewById(R.id.setting_img);
+        setting_txt = (TextView) findViewById(R.id.setting_txt);
 
-        titleview = findViewById(R.id.titleview);
+        titleview = (TitleView) findViewById(R.id.titleview);
 
-        ver = findViewById(R.id.ver);
+        ver = (TextView) findViewById(R.id.ver);
         ver.setText(String.format("V %s", Tools.getVersionName(MyAPP.context)));
 
         homelist.add(home1);
@@ -270,10 +265,8 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
         namelist.add(name3);
         namelist.add(name4);
 
-        imageView = findViewById(R.id.image);
-        videoView = findViewById(R.id.video);
-
-        load = findViewById(R.id.load);
+        imageView = (ImageView) findViewById(R.id.image);
+        videoView = (VideoView) findViewById(R.id.video);
 
         //如果有图片
         if (SaveUtils.getBoolean(Save_Key.NewImage)) {
@@ -328,7 +321,6 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
         home1.requestFocus();
     }
 
-
     @Override
     public void onBackPressed() {
         //屏蔽返回键
@@ -338,10 +330,11 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
      * 南方传媒认证
      */
     public void nanchuan() {
-
+        LogUtil.e(TAG, "准备认证");
         if (!nanchuanAuthFlag && Tools.isNetworkConnected()) {
             nanchuanAuthFlag = true;
-            LogUtil.e(TAG, "准备认证");
+//            Toast.makeText(this, "开始认证", Toast.LENGTH_SHORT).show();
+            LogUtil.e(TAG, "开始认证");
 
             Intent intent = new Intent("com.snm.upgrade.approve.ApproveManagerServer");
             intent.setPackage("com.snm.upgrade");
@@ -356,10 +349,12 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
                             public void returnResult(String Result) {
                                 if (Result.equals("998")) {
                                     NanChuan_Ok = false;
-
+                                    LogUtil.e(TAG, "认证失败");
+                                    findViewById(R.id.dispaly).setVisibility(View.VISIBLE);
 //                                    Toast.makeText(MyAPP.context, "南方传媒认证失败", Toast.LENGTH_LONG).show();
                                 } else {
                                     NanChuan_Ok = true;
+                                    LogUtil.e(TAG, "认证成功");
                                     findViewById(R.id.dispaly).setVisibility(View.GONE);
                                     Toast.makeText(MyAPP.context, "南方传媒认证成功", Toast.LENGTH_LONG).show();
                                 }
@@ -424,9 +419,9 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
      */
     @SuppressLint("CheckResult")
     @Subscribe
-    public void onMessage(Theme_Entity entity) {
+    public void onMessage(Theme_Model entity) {
 
-        Theme_Entity.ResultBean bean = entity.getResult();
+        Theme_Model.ResultBean bean = entity.getResult();
         if (bean != null) {
 
             //图片名
@@ -470,7 +465,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
 
             //是否初始化逻辑科技
             if (bean.getStartLgeekFlag() == 1) {
-//                LgeekTVSdkMrg.getInstance().init(MyAPP.context);
+
             }
 
             //是否显示栏目名
@@ -503,6 +498,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
      *
      * @param channelList 返回实体类
      */
+    @SuppressLint("CheckResult")
     @Subscribe
     public void onMessage(FindChannelList channelList) {
         Home_Activity.channelList = channelList;
@@ -535,7 +531,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
                 String s = Const.FilePath + SaveUtils.getString(Save_Key.ItemImage + i);
                 //判断文件是否存在
                 if (FileUtils.checkFileExists(Objects.requireNonNull(Tools.getFileNameWithSuffix(s)))) {
-                    options.placeholder(new BitmapDrawable(getResources(), ImageUtils.getBitmap(new File(s))));
+                    options.placeholder(getResources().getDrawable(R.mipmap.item_bg));
                     options.error(new BitmapDrawable(getResources(), ImageUtils.getBitmap(new File(s))));
                 }
                 options.skipMemoryCache(false);
@@ -747,25 +743,6 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
             }
 
             start();
-        }
-    }
-
-    class TitleTime2 extends CountDownTimer {
-
-        TitleTime2() {
-            super(5000, 100);
-        }
-
-        @Override
-        public void onTick(long l) {
-        }
-
-        @Override
-        public void onFinish() {
-            load.setVisibility(View.GONE);
-            if (!NanChuan_Ok) {
-                findViewById(R.id.dispaly).setVisibility(View.VISIBLE);
-            }
         }
     }
 

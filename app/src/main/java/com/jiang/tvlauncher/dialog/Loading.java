@@ -54,7 +54,7 @@ public class Loading {
     public static class LoadingDialog extends Dialog {
 
         public LoadingDialog(@NonNull Context context) {
-            super(context,  R.style.LoadingDialog);
+            super(context, R.style.LoadingDialog);
         }
 
         /**
@@ -65,7 +65,7 @@ public class Loading {
                 message = "加载中...";
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.dialog_loading, null);
-            TextView txtInfo =  layout.findViewById(R.id.txt_info);
+            TextView txtInfo = (TextView) layout.findViewById(R.id.txt_info);
             txtInfo.setText(message);
 
             LoadingDialog dialog = new LoadingDialog(context);

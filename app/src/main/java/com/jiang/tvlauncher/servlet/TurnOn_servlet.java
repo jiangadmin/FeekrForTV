@@ -12,7 +12,7 @@ import com.jiang.tvlauncher.MyAPP;
 import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.entity.Const;
 import com.jiang.tvlauncher.entity.Save_Key;
-import com.jiang.tvlauncher.entity.TurnOnEntity;
+import com.jiang.tvlauncher.entity.TurnOn_Model;
 import com.jiang.tvlauncher.server.TimingService;
 import com.jiang.tvlauncher.utils.HttpUtil;
 import com.jiang.tvlauncher.utils.LogUtil;
@@ -27,44 +27,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author: jiangadmin
- * @date: 2017/6/19.
- * @Email: www.fangmu@qq.com
- * @Phone: 186 6120 1018
+ * @author jiangadmin
+ * date: 2019/2/28.
+ * Email: www.fangmu@qq.com
+ * Phone: 186 6120 1018
  * TODO: 开机发送
  */
 
-public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOnEntity> {
+public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
     private static final String TAG = "TurnOn_servlet";
     Context context;
 
-    TimeCount timeCount;
-
     public TurnOn_servlet(Context context) {
         this.context = context;
-//        timeCount = new TimeCount(3000, 1000);
     }
 
     @Override
-    protected TurnOnEntity doInBackground(String... strings) {
-        Map map = new HashMap();
-        TurnOnEntity entity;
-
-        if (TextUtils.isEmpty(MyAPP.SN)) {
-            if (!TextUtils.isEmpty(SaveUtils.getString(Save_Key.SerialNum))) {
-                MyAPP.turnType = SaveUtils.getString(Save_Key.turnType);
-            } else {
-                new TurnOn_servlet(context).execute();
-                entity = new TurnOnEntity();
-                entity.setErrorcode(-3);
-                entity.setErrormsg("数据缺失 再来一次");
-                return entity;
-            }
-        }
+    protected TurnOn_Model doInBackground(String... strings) {
+        Map<String, String> map = new HashMap<>();
+        TurnOn_Model entity;
 
         map.put("serialNum", MyAPP.SN);
         map.put("turnType", MyAPP.turnType);
-        map.put("modelNum", MyAPP.modelNum);
+        map.put("modelNum", MyAPP.Model);
 
         map.put("systemVersion", Build.VERSION.INCREMENTAL);
         map.put("androidVersion", Build.VERSION.RELEASE);
@@ -72,14 +57,14 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOnEntity> {
         String res = HttpUtil.doPost(Const.URL + "dev/devTurnOffController/turnOn.do", map);
 
         if (TextUtils.isEmpty(res)) {
-            entity = new TurnOnEntity();
+            entity = new TurnOn_Model();
             entity.setErrorcode(-1);
             entity.setErrormsg("连接服务器失败");
         } else {
             try {
-                entity = new Gson().fromJson(res, TurnOnEntity.class);
+                entity = new Gson().fromJson(res, TurnOn_Model.class);
             } catch (Exception e) {
-                entity = new TurnOnEntity();
+                entity = new TurnOn_Model();
                 entity.setErrorcode(-2);
                 entity.setErrormsg("数据解析失败");
                 LogUtil.e(TAG, e.getMessage());
@@ -95,9 +80,9 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOnEntity> {
         if (entity.getErrorcode() == 1000) {
             MyAPP.TurnOnS = true;
 
-            TurnOnEntity.ResultBean.DevInfoBean devInfoBean = entity.getResult().getDevInfo();
-            TurnOnEntity.ResultBean.LaunchBean launchBean = entity.getResult().getLaunch();
-            TurnOnEntity.ResultBean.ShadowcnfBean shadowcnfBean = entity.getResult().getShadowcnf();
+            TurnOn_Model.ResultBean.DevInfoBean devInfoBean = entity.getResult().getDevInfo();
+            TurnOn_Model.ResultBean.LaunchBean launchBean = entity.getResult().getLaunch();
+            TurnOn_Model.ResultBean.ShadowcnfBean shadowcnfBean = entity.getResult().getShadowcnf();
 
             //归零
             num = 0;
@@ -188,26 +173,28 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOnEntity> {
                 }
             }
 
-        } else if (entity.getErrorcode() == -2) {
-            LogUtil.e(TAG, entity.getErrormsg());
-
-        } else {
-            timeCount.start();
-            LogUtil.e(TAG, "失败了" + entity.getErrormsg());
         }
-
         return entity;
     }
 
     @Override
-    protected void onPostExecute(TurnOnEntity entity) {
+    protected void onPostExecute(TurnOn_Model entity) {
         super.onPostExecute(entity);
         Const.Nets = false;
         Loading.dismiss();
 
         switch (entity.getErrorcode()) {
+            //成功
             case 1000:
                 EventBus.getDefault().post("update");
+                break;
+            //失败
+            default:
+                //如果有网络 继续发送
+                if (Tools.isNetworkConnected()) {
+                    new TimeCount().start();
+                }
+                LogUtil.e(TAG, entity.getErrormsg());
                 break;
         }
     }
@@ -215,11 +202,11 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOnEntity> {
     public static int num = 0;
 
     /**
-     * 计时器
+     * 一分钟倒计时
      */
     class TimeCount extends CountDownTimer {
-        public TimeCount(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);//参数依次为总时长,和计时的时间间隔
+        TimeCount() {
+            super(60000, 1000);//参数依次为总时长,和计时的时间间隔
         }
 
         //倒计时完成

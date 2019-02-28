@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import com.jiang.tvlauncher.MyAPP;
 import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.entity.Const;
-import com.jiang.tvlauncher.entity.UpdateEntity;
+import com.jiang.tvlauncher.entity.Update_Model;
 import com.jiang.tvlauncher.utils.HttpUtil;
 import com.jiang.tvlauncher.utils.Tools;
 
@@ -22,7 +22,7 @@ import java.util.Map;
  * TODO: 检查更新
  */
 
-public class Update_Servlet extends AsyncTask<String, Integer, UpdateEntity> {
+public class Update_Servlet extends AsyncTask<String, Integer, Update_Model> {
     private static final String TAG = "Update_Servlet";
     Activity activity;
 
@@ -31,7 +31,7 @@ public class Update_Servlet extends AsyncTask<String, Integer, UpdateEntity> {
     }
 
     @Override
-    protected UpdateEntity doInBackground(String... strings) {
+    protected Update_Model doInBackground(String... strings) {
         Map map = new HashMap();
         map.put("serialNum", MyAPP.SN);
         map.put("versionNum", Tools.getVersionName(MyAPP.context));
@@ -39,17 +39,17 @@ public class Update_Servlet extends AsyncTask<String, Integer, UpdateEntity> {
 
         String res = HttpUtil.doPost(Const.URL + "cms/appVersionController/findNewVersion.do", map);
 
-        UpdateEntity entity;
+        Update_Model entity;
         if (res != null) {
             try {
-                entity = new Gson().fromJson(res, UpdateEntity.class);
+                entity = new Gson().fromJson(res, Update_Model.class);
             } catch (Exception e) {
-                entity = new UpdateEntity();
+                entity = new Update_Model();
                 entity.setErrorcode(-2);
                 entity.setErrormsg("数据解析失败");
             }
         } else {
-            entity = new UpdateEntity();
+            entity = new Update_Model();
             entity.setErrorcode(-1);
             entity.setErrormsg("连接服务器失败");
         }
@@ -57,7 +57,7 @@ public class Update_Servlet extends AsyncTask<String, Integer, UpdateEntity> {
     }
 
     @Override
-    protected void onPostExecute(UpdateEntity entity) {
+    protected void onPostExecute(Update_Model entity) {
         super.onPostExecute(entity);
         Loading.dismiss();
 

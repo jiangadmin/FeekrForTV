@@ -42,7 +42,7 @@ public class APPList_Activity extends Base_Activity {
     }
 
     private void initview() {
-        mGridView = findViewById(R.id.app_grid);
+        mGridView = (GridView) findViewById(R.id.app_grid);
     }
 
     //能显示的程序包名

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.ActionMode;
+import android.view.SearchEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -51,7 +53,7 @@ public class NewAPPList_Activity extends Base_Activity implements AdapterView.On
     }
 
     private void initview() {
-        mGridView = findViewById(R.id.app_grid);
+        mGridView = (GridView) findViewById(R.id.app_grid);
     }
 
     private void initeven() {
@@ -73,4 +75,6 @@ public class NewAPPList_Activity extends Base_Activity implements AdapterView.On
             new DownUtil().downLoad(appList.get(i).getDownloadUrl(), appList.get(i).getAppName() + ".apk", true);
         }
     }
+
+
 }

@@ -8,7 +8,7 @@ package com.jiang.tvlauncher.entity;
  * Purpose:TODO
  * update：
  */
-public class BaseEntity {
+public class Base_Model {
 
     /**
      * errorcode : 0000
