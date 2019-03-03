@@ -32,7 +32,7 @@ public class FindChannelList_Servlet extends AsyncTask<String, Integer, FindChan
     public static int num = 1;
     String res;
 
-    TimeCount timeCount= new TimeCount(3000, 1000);
+    TimeCount timeCount = new TimeCount(3000, 1000);
 
     @Override
     protected FindChannelList doInBackground(String... strings) {

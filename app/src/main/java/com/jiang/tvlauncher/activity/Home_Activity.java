@@ -51,6 +51,7 @@ import com.jiang.tvlauncher.servlet.Update_Servlet;
 import com.jiang.tvlauncher.utils.FileUtils;
 import com.jiang.tvlauncher.utils.ImageUtils;
 import com.jiang.tvlauncher.utils.LogUtil;
+import com.jiang.tvlauncher.utils.RootCmd;
 import com.jiang.tvlauncher.utils.SaveUtils;
 import com.jiang.tvlauncher.utils.ShellUtils;
 import com.jiang.tvlauncher.utils.Tools;
@@ -135,6 +136,8 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
 
         initview();
         initeven();
+
+        LogUtil.e(TAG, RootCmd.haveRoot() + "");
 
         //判断网络
         if (!Tools.isNetworkConnected()) {

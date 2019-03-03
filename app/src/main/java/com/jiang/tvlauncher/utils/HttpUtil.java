@@ -37,7 +37,7 @@ public class HttpUtil {
      * @param params 请求数据
      * @return 返回des加密后数据
      */
-    public static String doGet(String urls,Map<String, String> params) {
+    public static String doGet(String urls, Map<String, String> params) {
         String paramsStr = "";
         for (Map.Entry<String, String> entry : params.entrySet()) {
             if (TextUtils.isEmpty(entry.getValue())) {
@@ -110,7 +110,7 @@ public class HttpUtil {
     public static String doPost(String url, Map<String, String> param) {
         StringBuilder paramStr = new StringBuilder();
         for (Map.Entry<String, String> para : param.entrySet()) {
-            if (TextUtils.isEmpty(para.getValue())){
+            if (TextUtils.isEmpty(para.getValue())) {
                 continue;
             }
             try {
@@ -174,7 +174,7 @@ public class HttpUtil {
                 ex.printStackTrace();
             }
         }
-        LogUtil.e(TAG, "HTTP返回：" + result);
+
         if (result != null) {
 
             return result;

@@ -27,6 +27,14 @@ public class SilentInstall {
         DataOutputStream dataOutputStream = null;
         BufferedReader errorStream = null;
         try {
+            String[] chmod = {"chmod", "777", apkPath};
+            ProcessBuilder builder = new ProcessBuilder(chmod);
+            try {
+                builder.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             // 申请su权限
             Process process = Runtime.getRuntime().exec("su");
             dataOutputStream = new DataOutputStream(process.getOutputStream());

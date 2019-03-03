@@ -28,7 +28,7 @@ public class AppInstallReceiver extends BroadcastReceiver {
         if (intent.getAction().equals(Intent.ACTION_PACKAGE_ADDED)) {
             String packageName = intent.getData().getSchemeSpecificPart();
             Loading.dismiss();
-
+            LogUtil.e(TAG, "安装成功");
             //如果之前被卸载过（应用自升级）
             if (!TextUtils.isEmpty(SaveUtils.getString(Const.包)))
                 if (SaveUtils.getString(Const.包).contains(packageName)) {
@@ -49,7 +49,7 @@ public class AppInstallReceiver extends BroadcastReceiver {
                 return;
             }
 
-            LogUtil.e(TAG, "安装成功");
+
             Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
             if (launchIntent != null) {
                 context.startActivity(launchIntent);
@@ -58,7 +58,7 @@ public class AppInstallReceiver extends BroadcastReceiver {
         //卸载
         if (intent.getAction().equals(Intent.ACTION_PACKAGE_REMOVED)) {
             String packageName = intent.getData().getSchemeSpecificPart();
-
+            LogUtil.e(TAG, "卸载成功");
             //清楚数据
             if (!TextUtils.isEmpty(SaveUtils.getString(Const.包)))
                 if (SaveUtils.getString(Const.包).length() > 10000) {
@@ -69,7 +69,7 @@ public class AppInstallReceiver extends BroadcastReceiver {
             if (TextUtils.isEmpty(SaveUtils.getString(Const.包)) || !SaveUtils.getString(Const.包).contains(packageName)) {
                 SaveUtils.setString(Const.包, SaveUtils.getString(Const.包) + packageName);
             }
-            LogUtil.e(TAG, "卸载成功");
+
         }
         //替换
         if (intent.getAction().equals(Intent.ACTION_PACKAGE_REPLACED)) {
