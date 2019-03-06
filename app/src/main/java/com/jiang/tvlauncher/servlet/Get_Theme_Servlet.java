@@ -19,10 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author: jiangadmin
- * @date: 2018/10/14
- * @Email: www.fangmu@qq.com
- * @Phone: 186 6120 1018
+ * @author jiangadmin
+ * date: 2018/10/14
+ * Email: www.fangmu@qq.com
+ * Phone: 186 6120 1018
  * TODO: 获取显示主题
  */
 public class Get_Theme_Servlet extends AsyncTask<String, Integer, Theme_Model> {
@@ -32,10 +32,10 @@ public class Get_Theme_Servlet extends AsyncTask<String, Integer, Theme_Model> {
 
     @Override
     protected Theme_Model doInBackground(String... strings) {
-        Map map = new HashMap();
+        Map<String,String> map = new HashMap<>();
 
         map.put("serialNum", MyAPP.SN);
-        map.put("devType", "1");
+        map.put("devType", "3");
 
         res = HttpUtil.doPost(Const.URL + "cms/themeController/findLauncherTheme.do", map);
 

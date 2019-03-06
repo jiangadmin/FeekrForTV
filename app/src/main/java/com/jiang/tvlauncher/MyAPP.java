@@ -60,11 +60,6 @@ public class MyAPP extends Application implements KtcpPaySDKCallback {
 
     public static Activity activity;
 
-    /**
-     * 判定是否是极米设备
-     */
-    public static boolean isxgimi = false;
-
     IUserInterfaceService iUserInterfaceService;
 
     @Override
@@ -102,9 +97,7 @@ public class MyAPP extends Application implements KtcpPaySDKCallback {
         //开机请求
         new TurnOn_servlet(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-        if (!TextUtils.isEmpty(SN)) {
-            isxgimi = true;
-        }
+
     }
 
     ServiceConnection serviceConnection = new ServiceConnection() {
@@ -112,9 +105,6 @@ public class MyAPP extends Application implements KtcpPaySDKCallback {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             LogUtil.e(TAG, "连接AIDL成功");
-
-            //设定为极米设备
-            isxgimi = true;
 
             //得到远程服务
             iUserInterfaceService = IUserInterfaceService.Stub.asInterface(iBinder);

@@ -42,13 +42,11 @@ public class AppInstallReceiver extends BroadcastReceiver {
             //如果要启动定制版腾讯视频
             if (packageName.equals(Const.TvViedo)) {
 
-
                 //获取VIP账号,备用
                 new GetVIP_Servlet(true).execute();
 
                 return;
             }
-
 
             Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
             if (launchIntent != null) {
@@ -59,13 +57,14 @@ public class AppInstallReceiver extends BroadcastReceiver {
         if (intent.getAction().equals(Intent.ACTION_PACKAGE_REMOVED)) {
             String packageName = intent.getData().getSchemeSpecificPart();
             LogUtil.e(TAG, "卸载成功");
+
             //清楚数据
             if (!TextUtils.isEmpty(SaveUtils.getString(Const.包)))
                 if (SaveUtils.getString(Const.包).length() > 10000) {
                     SaveUtils.setString(Const.包, null);
                 }
-            //记录卸载过的包
 
+            //记录卸载过的包
             if (TextUtils.isEmpty(SaveUtils.getString(Const.包)) || !SaveUtils.getString(Const.包).contains(packageName)) {
                 SaveUtils.setString(Const.包, SaveUtils.getString(Const.包) + packageName);
             }

@@ -50,7 +50,7 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
         map.put("serialNum", MyAPP.SN);
         map.put("turnType", MyAPP.turnType);
         map.put("modelNum", MyAPP.Model);
-
+        map.put("devType", "3");
         map.put("systemVersion", Build.VERSION.INCREMENTAL);
         map.put("androidVersion", Build.VERSION.RELEASE);
 

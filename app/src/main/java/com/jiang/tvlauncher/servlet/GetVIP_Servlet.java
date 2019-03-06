@@ -1,7 +1,6 @@
 package com.jiang.tvlauncher.servlet;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
@@ -21,10 +20,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author: jiangyao
- * @date: 2018/5/14
- * @Email: www.fangmu@qq.com
- * @Phone: 186 6120 1018
+ * @author jiangyao
+ * date: 2018/5/14
+ * Email: www.fangmu@qq.com
+ * Phone: 186 6120 1018
  * TODO: 获取会员账号
  */
 public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Model> {
@@ -38,7 +37,7 @@ public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Model> {
 
     @Override
     protected VIP_Model doInBackground(String... strings) {
-        Map map = new HashMap();
+        Map<String, String> map = new HashMap<>();
         VIP_Model entity;
         if (!TextUtils.isEmpty(MyAPP.SN)) {
             map.put("serialNum", MyAPP.SN);
@@ -113,12 +112,7 @@ public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Model> {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MyAPP.activity);
                     builder.setTitle("抱歉");
                     builder.setMessage("应用 云视听 资源缺失，请联系服务人员");
-                    builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
+                    builder.setNegativeButton("确定", (dialog, which) -> dialog.dismiss());
                     builder.show();
 
                 } else {

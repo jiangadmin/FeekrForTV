@@ -67,8 +67,8 @@ public class Timing_Servlet extends AsyncTask<String, Integer, MonitorRes_Model>
             case 1000:
 
                 //信号源开关
-                Const.BussFlag = entity.getResult().getBussFlag();
-                EventBus.getDefault().post(String.valueOf(entity.getResult().getBussFlag()));
+//                Const.BussFlag = entity.getResult().getBussFlag();
+//                EventBus.getDefault().post(String.valueOf(entity.getResult().getBussFlag()));
                 break;
         }
     }
