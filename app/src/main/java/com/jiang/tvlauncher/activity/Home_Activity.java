@@ -618,6 +618,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
                 case 1:
 
                     if (channelList.getResult().get(i).getAppList() != null && channelList.getResult().get(i).getAppList().size() > 0) {
+
                         String packname = channelList.getResult().get(i).getAppList().get(0).getPackageName();
 
                         //如果要启动定制版腾讯视频
@@ -644,7 +645,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
                         } else {
 
                             Loading.show(this, "请稍后");
-                            new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), channelList.getResult().get(i).getAppList().get(0).getAppName() + ".apk", true);
+                            new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), Tools.getFileNameWithSuffix(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl()) , true);
                         }
                     } else
                         Toast.makeText(this, "栏目未开通", Toast.LENGTH_SHORT).show();
