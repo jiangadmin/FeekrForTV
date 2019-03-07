@@ -5,6 +5,8 @@ import android.text.format.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -43,7 +45,7 @@ public final class TimeUtil {
         time.setToNow();
         DateFormat.getDateInstance();
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         return df.format(c.getTime());
     }
 }

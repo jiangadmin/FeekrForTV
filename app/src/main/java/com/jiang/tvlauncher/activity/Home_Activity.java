@@ -385,6 +385,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        LogUtil.e(TAG, keyCode);
         switch (keyCode) {
             case KeyEvent.KEYCODE_MENU:
                 System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);// 数组向左移位操作

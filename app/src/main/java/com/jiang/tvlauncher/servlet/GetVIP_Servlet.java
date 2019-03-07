@@ -50,6 +50,10 @@ public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Model> {
 
         String res = HttpUtil.doPost(Const.URL + "tencent/tencentVideoController/getVuidInfo.do", map);
 
+        LogUtil.e(TAG, "⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩会员数据⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩");
+        LogUtil.e(TAG, res);
+        LogUtil.e(TAG, "⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧");
+
         //空判断
         if (res != null && res.contains(",\"result\":\"\"")) {
             res = res.replaceAll(",\"result\":\"\"", "");
@@ -117,7 +121,7 @@ public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Model> {
 
                 } else {
                     Loading.show(MyAPP.activity, "请稍后");
-                    new DownUtil().downLoad(Const.云视听Url, "云视听.apk", true);
+                    new DownUtil().downLoad(Const.云视听Url, Tools.getFileNameWithSuffix(Const.云视听Url), true);
                 }
             }
         }

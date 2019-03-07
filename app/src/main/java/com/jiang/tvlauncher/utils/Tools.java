@@ -533,7 +533,7 @@ public final class Tools {
      */
     public static String NowTime() {
         //获取当前时间
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmm", Locale.CHINA);
         Date curDate = new Date(System.currentTimeMillis());
         return formatter.format(curDate);
     }

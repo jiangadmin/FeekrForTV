@@ -39,6 +39,10 @@ public class Get_Theme_Servlet extends AsyncTask<String, Integer, Theme_Model> {
 
         res = HttpUtil.doPost(Const.URL + "cms/themeController/findLauncherTheme.do", map);
 
+        LogUtil.e(TAG, "⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩主题设置⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩");
+        LogUtil.e(TAG, res);
+        LogUtil.e(TAG, "⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧");
+
         Theme_Model entity;
 
         if (TextUtils.isEmpty(res)) {

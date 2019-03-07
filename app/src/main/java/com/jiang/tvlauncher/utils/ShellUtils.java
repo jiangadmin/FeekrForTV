@@ -1,5 +1,7 @@
 package com.jiang.tvlauncher.utils;
 
+import com.jiang.tvlauncher.dialog.Loading;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -351,9 +353,9 @@ public class ShellUtils {
             result = 2;
         }
         LogUtil.e(TAG, "successMsg:" + successMsg + ", ErrorMsg:" + errorMsg);
+        Loading.dismiss();
         return result;
     }
-
 
 
 }

@@ -56,6 +56,8 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
 
         String res = HttpUtil.doPost(Const.URL + "dev/devTurnOffController/turnOn.do", map);
 
+        LogUtil.e(TAG, res);
+
         if (TextUtils.isEmpty(res)) {
             entity = new TurnOn_Model();
             entity.setErrorcode(-1);
@@ -71,11 +73,9 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
             }
         }
 
-        LogUtil.e(TAG, "=======================================================================================");
-        if (entity != null && entity.getErrormsg() != null)
-            LogUtil.e(TAG, entity.getErrormsg());
-//        Toast.makeText(context, "开机请求返回："+entity.getErrormsg(), Toast.LENGTH_SHORT).show();
-        LogUtil.e(TAG, "=======================================================================================");
+        LogUtil.e(TAG, "⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩开机接口⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩");
+        LogUtil.e(TAG, res);
+        LogUtil.e(TAG, "⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧");
 
         if (entity.getErrorcode() == 1000) {
             MyAPP.TurnOnS = true;
@@ -128,7 +128,6 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
             }
 
             String s = devInfoBean.getZoomVal();
-            LogUtil.e(TAG, "梯形数据:" + s);
 
             if (shadowcnfBean != null) {
                 //心跳时间

@@ -14,10 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author: jiangyao
- * @date: 2018/5/18
- * @Email: www.fangmu@qq.com
- * @Phone: 186 6120 1018
+ * @author jiangyao
+ * date: 2018/5/18
+ * Email: www.fangmu@qq.com
+ * Phone: 186 6120 1018
  * TODO: 会员登录返回
  */
 public class VIPCallBack_Servlet extends AsyncTask<VIPCallBack_Servlet.TencentVip, Integer, Base_Model> {
@@ -26,7 +26,7 @@ public class VIPCallBack_Servlet extends AsyncTask<VIPCallBack_Servlet.TencentVi
     @Override
     protected Base_Model doInBackground(TencentVip... tencentVips) {
         TencentVip vip = tencentVips[0];
-        Map map = new HashMap();
+        Map<String, String> map = new HashMap<>();
         map.put("vuid", Const.ktcp_vuid);
         map.put("vtoken", Const.ktcp_vtoken);
         map.put("serialNum", MyAPP.SN);

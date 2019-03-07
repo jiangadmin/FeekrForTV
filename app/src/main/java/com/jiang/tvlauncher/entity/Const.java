@@ -1,6 +1,5 @@
 package com.jiang.tvlauncher.entity;
 
-import com.jiang.tvlauncher.BuildConfig;
 import com.jiang.tvlauncher.MyAPP;
 
 /**
@@ -13,7 +12,7 @@ import com.jiang.tvlauncher.MyAPP;
  */
 public class Const {
 
-//    public static String URL = BuildConfig.NetUrl;
+    //    public static String URL = BuildConfig.NetUrl;
     public static String URL = "http://testapi.feekrs.com/";
 //    public static String URL = "http://api.tentrip.aisee.tv/";
 

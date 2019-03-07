@@ -19,10 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author: jiangadmin
- * @date: 2017/8/9.
- * @Email: www.fangmu@qq.com
- * @Phone: 186 6120 1018
+ * @author jiangadmin
+ * date: 2017/8/9.
+ * Email: www.fangmu@qq.com
+ * Phone: 186 6120 1018
  * TODO: 获取可显示应用列表
  */
 
@@ -36,7 +36,7 @@ public class FindChannelList_Servlet extends AsyncTask<String, Integer, FindChan
 
     @Override
     protected FindChannelList doInBackground(String... strings) {
-        Map map = new HashMap();
+        Map<String,String> map = new HashMap<>();
         FindChannelList channelList;
         if (TextUtils.isEmpty(SaveUtils.getString(Save_Key.ID))) {
             channelList = new FindChannelList();
@@ -47,6 +47,10 @@ public class FindChannelList_Servlet extends AsyncTask<String, Integer, FindChan
 
         map.put("devId", SaveUtils.getString(Save_Key.ID));
         res = HttpUtil.doPost(Const.URL + "cms/channelController/findChannelList.do", map);
+
+        LogUtil.e(TAG, "⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩栏目信息⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩");
+        LogUtil.e(TAG, res);
+        LogUtil.e(TAG, "⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧");
 
         if (TextUtils.isEmpty(res)) {
             channelList = new FindChannelList();

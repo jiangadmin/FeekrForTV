@@ -2,9 +2,11 @@ package com.jiang.tvlauncher.servlet;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jiang.tvlauncher.MyAPP;
+import com.jiang.tvlauncher.activity.Setting_Activity;
 import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.entity.Const;
 import com.jiang.tvlauncher.entity.Update_Model;
@@ -15,10 +17,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author: jiangadmin
- * @date: 2017/6/19.
- * @Email: www.fangmu@qq.com
- * @Phone: 186 6120 1018
+ * @author jiangadmin
+ * date: 2017/6/19.
+ * Email: www.fangmu@qq.com
+ * Phone: 186 6120 1018
  * TODO: 检查更新
  */
 
@@ -32,7 +34,7 @@ public class Update_Servlet extends AsyncTask<String, Integer, Update_Model> {
 
     @Override
     protected Update_Model doInBackground(String... strings) {
-        Map map = new HashMap();
+        Map<String, String> map = new HashMap<>();
         map.put("serialNum", MyAPP.SN);
         map.put("versionNum", Tools.getVersionName(MyAPP.context));
         map.put("buildNum", String.valueOf(Tools.getVersionCode(MyAPP.context)));
@@ -64,12 +66,14 @@ public class Update_Servlet extends AsyncTask<String, Integer, Update_Model> {
         if (entity.getErrorcode() == 1000) {
             if (entity.getResult().getBuildNum() > Tools.getVersionCode(MyAPP.context)) {
                 Loading.show(activity, "安装中");
-                new DownUtil().downLoad(entity.getResult().getDownloadUrl(),"Feekr"+entity.getResult().getVersionNum()+".apk",true);
+                new DownUtil().downLoad(entity.getResult().getDownloadUrl(), "Feekr" + entity.getResult().getVersionNum() + ".apk", true);
             }
         } else if (entity.getErrorcode() == 15) {
 //            Toast.makeText(activity, TAG+entity.getErrormsg(), Toast.LENGTH_SHORT).show();
         } else {
-
+            if (activity instanceof Setting_Activity) {
+                Toast.makeText(activity, "暂无新的版本", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
