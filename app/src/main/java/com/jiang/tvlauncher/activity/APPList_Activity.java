@@ -42,7 +42,7 @@ public class APPList_Activity extends Base_Activity {
     }
 
     private void initview() {
-        mGridView = (GridView) findViewById(R.id.app_grid);
+        mGridView = findViewById(R.id.app_grid);
     }
 
     //能显示的程序包名
@@ -69,12 +69,7 @@ public class APPList_Activity extends Base_Activity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("错误");
             builder.setMessage("资源缺失，请联系服务人员!");
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    finish();
-                }
-            });
+            builder.setPositiveButton("确定", (dialogInterface, i) -> finish());
             builder.show();
         } else if (showlist.size() == 1) {
             //如果就一个，那就直接启动

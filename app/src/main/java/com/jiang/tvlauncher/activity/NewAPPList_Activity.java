@@ -53,7 +53,7 @@ public class NewAPPList_Activity extends Base_Activity implements AdapterView.On
     }
 
     private void initview() {
-        mGridView = (GridView) findViewById(R.id.app_grid);
+        mGridView = findViewById(R.id.app_grid);
     }
 
     private void initeven() {

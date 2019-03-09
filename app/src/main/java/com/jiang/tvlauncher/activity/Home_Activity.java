@@ -231,31 +231,31 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
 
     private void initview() {
 
-        main_bg = (ImageView) findViewById(R.id.main_bg);
-        main_bg_0 = (ImageView) findViewById(R.id.main_bg_0);
-        title_view = (LinearLayout) findViewById(R.id.title_view);
-        title_icon = (ImageView) findViewById(R.id.title_icon);
-        title_0 = (TextView) findViewById(R.id.title_0);
-        title = (TextView) findViewById(R.id.title);
-        title_2 = (TextView) findViewById(R.id.title_2);
+        main_bg = findViewById(R.id.main_bg);
+        main_bg_0 = findViewById(R.id.main_bg_0);
+        title_view = findViewById(R.id.title_view);
+        title_icon = findViewById(R.id.title_icon);
+        title_0 = findViewById(R.id.title_0);
+        title = findViewById(R.id.title);
+        title_2 = findViewById(R.id.title_2);
 
-        home1 = (ImageView) findViewById(R.id.home_1);
-        home2 = (ImageView) findViewById(R.id.home_2);
-        home3 = (ImageView) findViewById(R.id.home_3);
-        home4 = (ImageView) findViewById(R.id.home_4);
+        home1 = findViewById(R.id.home_1);
+        home2 = findViewById(R.id.home_2);
+        home3 = findViewById(R.id.home_3);
+        home4 = findViewById(R.id.home_4);
 
-        name1 = (TextView) findViewById(R.id.home_1_name);
-        name2 = (TextView) findViewById(R.id.home_2_name);
-        name3 = (TextView) findViewById(R.id.home_3_name);
-        name4 = (TextView) findViewById(R.id.home_4_name);
+        name1 = findViewById(R.id.home_1_name);
+        name2 = findViewById(R.id.home_2_name);
+        name3 = findViewById(R.id.home_3_name);
+        name4 = findViewById(R.id.home_4_name);
 
-        setting = (LinearLayout) findViewById(R.id.setting);
-        setting_img = (ImageView) findViewById(R.id.setting_img);
-        setting_txt = (TextView) findViewById(R.id.setting_txt);
+        setting = findViewById(R.id.setting);
+        setting_img = findViewById(R.id.setting_img);
+        setting_txt = findViewById(R.id.setting_txt);
 
-        titleview = (TitleView) findViewById(R.id.titleview);
+        titleview = findViewById(R.id.titleview);
 
-        ver = (TextView) findViewById(R.id.ver);
+        ver = findViewById(R.id.ver);
         ver.setText(String.format("V %s", Tools.getVersionName(MyAPP.context)));
 
         homelist.add(home1);
@@ -268,8 +268,8 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
         namelist.add(name3);
         namelist.add(name4);
 
-        imageView = (ImageView) findViewById(R.id.image);
-        videoView = (VideoView) findViewById(R.id.video);
+        imageView = findViewById(R.id.image);
+        videoView = findViewById(R.id.video);
 
         //如果有图片
         if (SaveUtils.getBoolean(Save_Key.NewImage)) {
@@ -286,18 +286,10 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
             videoView.setVisibility(View.VISIBLE);
             videoView.setZOrderOnTop(true);
             videoView.setVideoURI(Uri.parse(SaveUtils.getString(Save_Key.NewVideoUrl)));
-            videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mediaPlayer) {
-                    videoView.setVisibility(View.GONE);
-                }
-            });
-            videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-                @Override
-                public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-                    videoView.setVisibility(View.GONE);
-                    return false;
-                }
+            videoView.setOnCompletionListener(mediaPlayer -> videoView.setVisibility(View.GONE));
+            videoView.setOnErrorListener((mediaPlayer, i, i1) -> {
+                videoView.setVisibility(View.GONE);
+                return false;
             });
             videoView.start();
         }
@@ -646,6 +638,8 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
 
                             Loading.show(this, "请稍后");
                             new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), Tools.getFileNameWithSuffix(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl()) , true);
+//                            new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), channelList.getResult().get(i).getAppList().get(0).getAppName()+".apk" , true);
+//                            new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), "tvvideo.apk" , true);
                         }
                     } else
                         Toast.makeText(this, "栏目未开通", Toast.LENGTH_SHORT).show();

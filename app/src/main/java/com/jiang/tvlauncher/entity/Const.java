@@ -10,7 +10,7 @@ import com.jiang.tvlauncher.MyAPP;
  * Purpose:TODO 常量
  * update：
  */
-public class Const {
+public class  Const {
 
     //    public static String URL = BuildConfig.NetUrl;
     public static String URL = "http://testapi.feekrs.com/";

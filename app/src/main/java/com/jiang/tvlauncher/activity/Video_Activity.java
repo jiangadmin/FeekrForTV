@@ -72,18 +72,10 @@ public class Video_Activity extends Base_Activity {
             }
         }
 
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                videoView.start();
-            }
-        });
-        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-            @Override
-            public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-                finish();
-                return false;
-            }
+        videoView.setOnCompletionListener(mediaPlayer -> videoView.start());
+        videoView.setOnErrorListener((mediaPlayer, i, i1) -> {
+            finish();
+            return false;
         });
         videoView.start();
 

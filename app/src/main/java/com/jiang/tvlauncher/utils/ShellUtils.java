@@ -308,6 +308,14 @@ public class ShellUtils {
             return 1;
         }
 
+        String[] chmod = {"chmod", "777", filePath};
+        ProcessBuilder builder = new ProcessBuilder(chmod);
+        try {
+            builder.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         String[] args = {"pm", "install", "-r", filePath};
         ProcessBuilder processBuilder = new ProcessBuilder(args);
         Process process = null;
