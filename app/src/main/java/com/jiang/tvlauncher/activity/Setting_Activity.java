@@ -76,25 +76,21 @@ public class Setting_Activity extends Base_Activity implements View.OnClickListe
         switch (view.getId()) {
             //网络设置
             case R.id.setting_1:
-                //如果是有线连接
-                if (Tools.isLineConnected())
-                    //启动到有线连接页面
-                    startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-                else
-                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-
+                ShellUtils.execCommand("am start -n com.tianci.setting/com.tianci.setting.activity.ConnectSetting\n", false);
                 break;
             //图像声音
             case R.id.setting_2:
                 ShellUtils.execCommand("am start -n com.tianci.setting/com.tianci.setting.activity.PictureSoundSetting\n", false);
-
                 break;
             //系统设置
             case R.id.setting_3:
                 ShellUtils.execCommand("am start -n com.tianci.setting/com.tianci.setting.activity.GeneralSetting\n", false);
-
+//                ShellUtils.execCommand("am start -n com.skyworth_gz.hotel/com.skyworth_gz.hotel.runtime.HotelActivity\n", false);
+                break;   //系统设置
+            case R.id.setting_4:
+//                ShellUtils.execCommand("am start -n com.tianci.setting/com.tianci.setting.activity.GeneralSetting\n", false);
+                ShellUtils.execCommand("am start -n com.skyworth_gz.hotel/com.skyworth_gz.hotel.runtime.HotelActivity\n", false);
                 break;
-
             //检测更新
             case R.id.setting_5:
                 Loading.show(this, "检查更新");

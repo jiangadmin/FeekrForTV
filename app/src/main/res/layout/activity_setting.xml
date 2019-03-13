@@ -80,12 +80,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_shezhi" />
+            android:src="@drawable/ic_shezhi0" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="系统设置"
+            android:textColor="@color/white"
+            android:textSize="26sp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/line_v0" />
+
+    <LinearLayout
+        android:id="@+id/setting_4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/sel_main_focus"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_shezhi" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="高级设置"
             android:textColor="@color/white"
             android:textSize="26sp" />
 
