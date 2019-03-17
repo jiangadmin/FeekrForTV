@@ -1,5 +1,6 @@
 package com.jiang.tvlauncher.servlet;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.google.gson.Gson;
@@ -25,10 +26,6 @@ import java.util.Map;
  * update：
  */
 public class Timing_Servlet extends AsyncTask<String, Integer, MonitorRes_Model> {
-
-    private static final String TAG = "Timing_Servlet";
-
-    private static boolean sleep = false;
 
     @Override
     protected MonitorRes_Model doInBackground(String... infos) {
@@ -65,10 +62,19 @@ public class Timing_Servlet extends AsyncTask<String, Integer, MonitorRes_Model>
         super.onPostExecute(entity);
         switch (entity.getErrorcode()) {
             case 1000:
+                Const.BussFlag = entity.getResult().getBussFlag();
+                if (Const.BussFlag == 0) {
 
-                //信号源开关
-//                Const.BussFlag = entity.getResult().getBussFlag();
-//                EventBus.getDefault().post(String.valueOf(entity.getResult().getBussFlag()));
+                    Intent backHome = new Intent(Intent.ACTION_MAIN);
+
+                    backHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    backHome.addCategory(Intent.CATEGORY_HOME);
+
+                    MyAPP.context.startActivity(backHome);
+
+                }
+                EventBus.getDefault().post(String.valueOf(entity.getResult().getBussFlag()));
                 break;
         }
     }

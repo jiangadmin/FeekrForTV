@@ -36,7 +36,7 @@ public class FindChannelList_Servlet extends AsyncTask<String, Integer, FindChan
 
     @Override
     protected FindChannelList doInBackground(String... strings) {
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         FindChannelList channelList;
         if (TextUtils.isEmpty(SaveUtils.getString(Save_Key.ID))) {
             channelList = new FindChannelList();

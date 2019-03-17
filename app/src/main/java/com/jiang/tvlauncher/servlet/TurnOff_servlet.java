@@ -25,15 +25,14 @@ import java.util.Map;
 public class TurnOff_servlet extends AsyncTask<String, Integer, Base_Model> {
     @Override
     protected Base_Model doInBackground(String... strings) {
-        Map map = new HashMap();
+        Map<String, String> map = new HashMap<>();
         Base_Model entity;
         if (TextUtils.isEmpty(SaveUtils.getString(Save_Key.ID))) {
             entity = new Base_Model();
             entity.setErrorcode(-3);
             entity.setErrormsg("数据缺失");
-        }
-        else
-        map.put("devId", SaveUtils.getString(Save_Key.ID));
+        } else
+            map.put("devId", SaveUtils.getString(Save_Key.ID));
         map.put("turnType", "3");
 
         String res = HttpUtil.doPost(Const.URL + "dev/devTurnOffController/turnOff.do", map);

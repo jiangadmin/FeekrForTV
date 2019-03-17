@@ -32,7 +32,7 @@ public class Get_Theme_Servlet extends AsyncTask<String, Integer, Theme_Model> {
 
     @Override
     protected Theme_Model doInBackground(String... strings) {
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
 
         map.put("serialNum", MyAPP.SN);
         map.put("devType", "3");

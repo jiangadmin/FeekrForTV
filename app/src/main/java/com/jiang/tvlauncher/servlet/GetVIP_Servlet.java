@@ -29,7 +29,7 @@ import java.util.Map;
 public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Model> {
     private static final String TAG = "GetVIP_Servlet";
 
-    boolean IsOpen = true;
+    boolean IsOpen;
 
     public GetVIP_Servlet(boolean isOpen) {
         IsOpen = isOpen;
