@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,7 +17,6 @@ import com.jiang.tvlauncher.servlet.Update_Servlet;
 import com.jiang.tvlauncher.utils.FileUtils;
 import com.jiang.tvlauncher.utils.LogUtil;
 import com.jiang.tvlauncher.utils.ShellUtils;
-import com.jiang.tvlauncher.utils.Tools;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
@@ -85,11 +83,13 @@ public class Setting_Activity extends Base_Activity implements View.OnClickListe
             //系统设置
             case R.id.setting_3:
                 ShellUtils.execCommand("am start -n com.tianci.setting/com.tianci.setting.activity.GeneralSetting\n", false);
-//                ShellUtils.execCommand("am start -n com.skyworth_gz.hotel/com.skyworth_gz.hotel.runtime.HotelActivity\n", false);
-                break;   //系统设置
+                break;
+            //系统设置
             case R.id.setting_4:
-//                ShellUtils.execCommand("am start -n com.tianci.setting/com.tianci.setting.activity.GeneralSetting\n", false);
-                ShellUtils.execCommand("am start -n com.skyworth_gz.hotel/com.skyworth_gz.hotel.runtime.HotelActivity\n", false);
+                //高级设置
+//                ShellUtils.execCommand("am start -n com.skyworth_gz.hotel/com.skyworth_gz.hotel.runtime.HotelActivity\n", false);
+                //关于
+                ShellUtils.execCommand("am start -n com.tianci.setting/com.tianci.setting.abouttvsetting.tvinfoweb.TvInfoWebActivity\n", false);
                 break;
             //检测更新
             case R.id.setting_5:

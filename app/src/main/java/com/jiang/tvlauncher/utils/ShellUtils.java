@@ -293,6 +293,7 @@ public class ShellUtils {
                 LogUtil.e(TAG, e.getMessage(), e);
             }
         }
+        Loading.dismiss();
         return result;
     }
 
@@ -355,7 +356,7 @@ public class ShellUtils {
             }
         }
 
-        if (successMsg.toString().contains("Success") || successMsg.toString().contains("success")) {
+        if (successMsg.toString().toLowerCase().contains("success")) {
             result = 0;
         } else {
             result = 2;

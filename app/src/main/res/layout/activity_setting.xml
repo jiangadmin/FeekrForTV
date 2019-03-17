@@ -111,12 +111,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_shezhi" />
+            android:src="@drawable/ic_guanyu" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="高级设置"
+            android:text="关于本机"
             android:textColor="@color/white"
             android:textSize="26sp" />
 

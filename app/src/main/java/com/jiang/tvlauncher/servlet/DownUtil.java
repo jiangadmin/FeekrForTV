@@ -11,7 +11,6 @@ import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.entity.Const;
 import com.jiang.tvlauncher.utils.LogUtil;
 import com.jiang.tvlauncher.utils.ShellUtils;
-import com.jiang.tvlauncher.utils.SilentInstall;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -79,7 +78,9 @@ public class DownUtil {
                     if (fileName.contains(".apk")) {
                         LogUtil.e(TAG, "安装包");
 
-                        ShellUtils.installSilent(file.getPath());
+                        boolean Type = ShellUtils.install(file.getPath());
+
+                        LogUtil.e(TAG, "安装状态：" + Type);
 //                        new SilentInstall().install(file.getPath());
 
                     }
@@ -88,7 +89,7 @@ public class DownUtil {
                         LogUtil.e(TAG, "资源文件" + file.getPath());
 
                         //设置系统开机广告
-                        String bootanim = file.getPath().replace(fileName, "").replace("0","legacy");
+                        String bootanim = file.getPath().replace(fileName, "").replace("0", "legacy");
                         bootanim = bootanim.substring(0, bootanim.length() - 1);
                         SystemProperties.set("persist.sys.bootanima.path", bootanim);
                         LogUtil.e(TAG, "走开机动画" + bootanim);
