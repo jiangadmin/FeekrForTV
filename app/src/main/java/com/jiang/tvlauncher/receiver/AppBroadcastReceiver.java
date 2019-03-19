@@ -18,10 +18,10 @@ import com.jiang.tvlauncher.utils.ShellUtils;
 import com.jiang.tvlauncher.utils.Tools;
 
 /**
- * @author: jiangyao
- * @date: 2018/7/6
- * @Email: www.fangmu@qq.com
- * @Phone: 186 6120 1018
+ * @author jiangyao
+ * date: 2018/7/6
+ * Email: www.fangmu@qq.com
+ * Phone: 186 6120 1018
  * TODO:  逻辑科技调用
  */
 public class AppBroadcastReceiver extends BroadcastReceiver {

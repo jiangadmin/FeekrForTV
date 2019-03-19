@@ -11,6 +11,7 @@ import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.entity.Const;
 import com.jiang.tvlauncher.utils.LogUtil;
 import com.jiang.tvlauncher.utils.ShellUtils;
+import com.jiang.tvlauncher.utils.SilentInstall;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -78,10 +79,10 @@ public class DownUtil {
                     if (fileName.contains(".apk")) {
                         LogUtil.e(TAG, "安装包");
 
-                        boolean Type = ShellUtils.install(file.getPath());
+//                        boolean Type = ShellUtils.install(file.getPath());
 
-                        LogUtil.e(TAG, "安装状态：" + Type);
-//                        new SilentInstall().install(file.getPath());
+//                        LogUtil.e(TAG, "安装状态：" + Type);
+                        new SilentInstall().install(file.getPath());
 
                     }
                     //如果是资源文件

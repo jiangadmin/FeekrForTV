@@ -86,14 +86,11 @@ public class AppAdapter extends BaseAdapter {
         LogUtil.e(TAG, "包  名：  " + appBean.getPackageName());
 
         final int pos = position;
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent launchIntent = mContext.getPackageManager().getLaunchIntentForPackage(
-                        mAppBeanList.get(pos).getPackageName());
-                if (launchIntent != null) {
-                    mContext.startActivity(launchIntent);
-                }
+        convertView.setOnClickListener(v -> {
+            Intent launchIntent = mContext.getPackageManager().getLaunchIntentForPackage(
+                    mAppBeanList.get(pos).getPackageName());
+            if (launchIntent != null) {
+                mContext.startActivity(launchIntent);
             }
         });
         return convertView;

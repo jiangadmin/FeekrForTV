@@ -12,10 +12,10 @@ import com.jiang.tvlauncher.utils.LogUtil;
 import com.jiang.tvlauncher.utils.SaveUtils;
 
 /**
- * @author: jiangadmin
- * @date: 2017/7/3.
- * @Email: www.fangmu@qq.com
- * @Phone: 186 6120 1018
+ * @author jiangadmin
+ * date: 2017/7/3.
+ * Email: www.fangmu@qq.com
+ * Phone: 186 6120 1018
  * TODO: 应用安装/卸载广播监听
  */
 

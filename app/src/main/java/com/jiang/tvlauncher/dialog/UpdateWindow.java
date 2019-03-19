@@ -17,10 +17,10 @@ import com.jiang.tvlauncher.server.MyDownService;
 import java.io.File;
 
 /**
- * @author: jiangadmin
- * @date: 2015/12/16.
- * @Email: www.fangmu@qq.com
- * @Phone: 186 6120 1018
+ * @author jiangadmin
+ * date: 2015/12/16.
+ * Email: www.fangmu@qq.com
+ * Phone: 186 6120 1018
  * TODO: 下载更新
  */
 

@@ -13,10 +13,10 @@ import android.widget.TextView;
 import com.jiang.tvlauncher.R;
 
 /**
- * @author: jiangadmin
- * @date: 2017/6/12.
- * @Email: www.fangmu@qq.com
- * @Phone: 186 6120 1018
+ * @author jiangadmin
+ * date: 2017/6/12.
+ * Email: www.fangmu@qq.com
+ * Phone: 186 6120 1018
  * TODO: Loading
  */
 

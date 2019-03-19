@@ -11,12 +11,13 @@ import com.jiang.tvlauncher.utils.Tools;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
- * @author: jiangadmin
- * @date: 2017/6/19.
- * @Email: www.fangmu@qq.com
- * @Phone: 186 6120 1018
+ * @author jiangadmin
+ * date: 2017/6/19.
+ * Email: www.fangmu@qq.com
+ * Phone: 186 6120 1018
  * TODO: 关机广播监听
  */
 
@@ -36,7 +37,7 @@ public class ShutdownReceiver extends BroadcastReceiver {
                 fos = new FileOutputStream(
                         android.os.Environment.getExternalStorageDirectory()
                                 + File.separator + "SysLog.txt", true);
-                fos.write("系统退出".getBytes("utf-8"));
+                fos.write("系统退出".getBytes(StandardCharsets.UTF_8));
                 fos.close();
             } catch (Exception e) {
                 e.printStackTrace();

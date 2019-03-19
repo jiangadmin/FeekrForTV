@@ -45,7 +45,7 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
     @Override
     protected TurnOn_Model doInBackground(String... strings) {
         Map<String, String> map = new HashMap<>();
-        TurnOn_Model entity;
+        TurnOn_Model model;
 
         map.put("serialNum", MyAPP.SN);
         map.put("turnType", MyAPP.turnType);
@@ -60,29 +60,28 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
         LogUtil.e(TAG, res);
         LogUtil.e(TAG, "⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧");
 
-
         if (TextUtils.isEmpty(res)) {
-            entity = new TurnOn_Model();
-            entity.setErrorcode(-1);
-            entity.setErrormsg("连接服务器失败");
+            model = new TurnOn_Model();
+            model.setErrorcode(-1);
+            model.setErrormsg("连接服务器失败");
         } else {
             try {
-                entity = new Gson().fromJson(res, TurnOn_Model.class);
+                model = new Gson().fromJson(res, TurnOn_Model.class);
             } catch (Exception e) {
-                entity = new TurnOn_Model();
-                entity.setErrorcode(-2);
-                entity.setErrormsg("数据解析失败");
+                model = new TurnOn_Model();
+                model.setErrorcode(-2);
+                model.setErrormsg("数据解析失败");
                 LogUtil.e(TAG, e.getMessage());
             }
         }
 
 
-        if (entity.getErrorcode() == 1000) {
+        if (model.getErrorcode() == 1000) {
             MyAPP.TurnOnS = true;
 
-            TurnOn_Model.ResultBean.DevInfoBean devInfoBean = entity.getResult().getDevInfo();
-            TurnOn_Model.ResultBean.LaunchBean launchBean = entity.getResult().getLaunch();
-            TurnOn_Model.ResultBean.ShadowcnfBean shadowcnfBean = entity.getResult().getShadowcnf();
+            TurnOn_Model.ResultBean.DevInfoBean devInfoBean = model.getResult().getDevInfo();
+            TurnOn_Model.ResultBean.LaunchBean launchBean = model.getResult().getLaunch();
+            TurnOn_Model.ResultBean.ShadowcnfBean shadowcnfBean = model.getResult().getShadowcnf();
 
             //归零
             num = 0;
@@ -173,16 +172,16 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
             }
 
         }
-        return entity;
+        return model;
     }
 
     @Override
-    protected void onPostExecute(TurnOn_Model entity) {
-        super.onPostExecute(entity);
+    protected void onPostExecute(TurnOn_Model model) {
+        super.onPostExecute(model);
         Const.Nets = false;
         Loading.dismiss();
 
-        switch (entity.getErrorcode()) {
+        switch (model.getErrorcode()) {
             //成功
             case 1000:
                 EventBus.getDefault().post("update");
@@ -193,7 +192,7 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
                 if (Tools.isNetworkConnected()) {
                     new TimeCount().start();
                 }
-                LogUtil.e(TAG, entity.getErrormsg());
+                LogUtil.e(TAG, model.getErrormsg());
                 break;
         }
     }
@@ -213,7 +212,8 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
         public void onFinish() {
             num++;
             //再次启动
-            new TurnOn_servlet(context).execute();
+            if (context != null)
+                new TurnOn_servlet(context).execute();
 
         }
 
