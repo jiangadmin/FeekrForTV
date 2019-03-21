@@ -79,10 +79,10 @@ public class DownUtil {
                     if (fileName.contains(".apk")) {
                         LogUtil.e(TAG, "安装包");
 
-//                        boolean Type = ShellUtils.install(file.getPath());
+                       ShellUtils.installSilent(file.getPath());
 
 //                        LogUtil.e(TAG, "安装状态：" + Type);
-                        new SilentInstall().install(file.getPath());
+//                        new SilentInstall().install(file.getPath());
 
                     }
                     //如果是资源文件

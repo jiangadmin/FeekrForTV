@@ -310,6 +310,7 @@ public class ShellUtils {
         }
 
         String[] chmod = {"chmod", "777", filePath};
+
         ProcessBuilder builder = new ProcessBuilder(chmod);
         try {
             builder.start();
