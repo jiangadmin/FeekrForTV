@@ -247,53 +247,21 @@ public class ShellUtils {
 
 
     /**
-     * 执行具体的静默安装逻辑，需要手机ROOT。
+     * 根据包名查询是否安装过此应用
      *
-     * @param apkPath 要安装的apk文件的路径
-     * @return 安装成功返回true，安装失败返回false。
+     * @return
      */
-    public static boolean install(String apkPath) {
+    public static boolean ISinstall(String packageName) {
         boolean result = false;
-        DataOutputStream dataOutputStream = null;
-        BufferedReader errorStream = null;
+        String[] chmod = {"pm", "list", "packages"};
+
+        ProcessBuilder builder = new ProcessBuilder(chmod);
         try {
-            // 申请su权限
-            Process process = Runtime.getRuntime().exec("su");
-            dataOutputStream = new DataOutputStream(process.getOutputStream());
-            // 执行pm install命令
-            String command = "pm install -r " + apkPath + "\n";
-            dataOutputStream.write(command.getBytes(Charset.forName("utf-8")));
-            dataOutputStream.flush();
-            dataOutputStream.writeBytes("exit\n");
-            dataOutputStream.flush();
-            process.waitFor();
-            errorStream = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            String msg = "";
-            String line;
-            // 读取命令的执行结果
-            while ((line = errorStream.readLine()) != null) {
-                msg += line;
-            }
-            LogUtil.e(TAG, "install msg is " + msg);
-            // 如果执行结果中包含Failure字样就认为是安装失败，否则就认为安装成功
-            if (!msg.contains("Failure")) {
-                result = true;
-            }
-        } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage(), e);
-        } finally {
-            try {
-                if (dataOutputStream != null) {
-                    dataOutputStream.close();
-                }
-                if (errorStream != null) {
-                    errorStream.close();
-                }
-            } catch (IOException e) {
-                LogUtil.e(TAG, e.getMessage(), e);
-            }
+            Process prome = builder.start();
+            LogUtil.e(TAG,prome.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        Loading.dismiss();
         return result;
     }
 

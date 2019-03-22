@@ -337,21 +337,21 @@ public final class Tools {
      * @return
      */
     public static boolean isAppInstalled(String packagename) {
-        PackageInfo packageInfo;
-        try {
-            packageInfo = MyAPP.context.getPackageManager().getPackageInfo(packagename, 0);
-        } catch (Exception e) {
-            packageInfo = null;
-            e.printStackTrace();
+
+        PackageManager manager = MyAPP.context.getPackageManager();
+
+        List<PackageInfo> packageInfos = manager.getInstalledPackages(0);
+
+        for (PackageInfo info : packageInfos) {
+            if (info.equals(packagename)) {
+                return true;
+            }
         }
-        if (packageInfo == null) {
-            //System.out.println("没有安装");
-            return false;
-        } else {
-            //System.out.println("已经安装");
-            return true;
-        }
+
+        return false;
+
     }
+
 
     /**
      * 版本名

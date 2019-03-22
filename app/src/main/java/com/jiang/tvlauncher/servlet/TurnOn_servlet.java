@@ -184,7 +184,9 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
         switch (model.getErrorcode()) {
             //成功
             case 1000:
+                LogUtil.e(TAG,"发送EventBus信息");
                 EventBus.getDefault().post("update");
+
                 break;
             //失败
             default:

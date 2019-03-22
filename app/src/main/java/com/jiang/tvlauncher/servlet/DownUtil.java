@@ -1,7 +1,6 @@
 package com.jiang.tvlauncher.servlet;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.SystemProperties;
 import android.view.KeyEvent;
 import android.view.WindowManager;
@@ -11,7 +10,6 @@ import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.entity.Const;
 import com.jiang.tvlauncher.utils.LogUtil;
 import com.jiang.tvlauncher.utils.ShellUtils;
-import com.jiang.tvlauncher.utils.SilentInstall;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -79,7 +77,7 @@ public class DownUtil {
                     if (fileName.contains(".apk")) {
                         LogUtil.e(TAG, "安装包");
 
-                       ShellUtils.installSilent(file.getPath());
+                        ShellUtils.installSilent(file.getPath());
 
 //                        LogUtil.e(TAG, "安装状态：" + Type);
 //                        new SilentInstall().install(file.getPath());

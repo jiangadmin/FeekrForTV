@@ -11,7 +11,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -210,7 +209,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
                 break;
 
             case "update":
-
+                LogUtil.e(TAG, "接收EventBus信息");
                 //检查更新
                 new Update_Servlet(this).execute();
                 //查询栏目
@@ -637,7 +636,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
                         } else {
 
                             Loading.show(this, "请稍后");
-                            new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), Tools.getFileNameWithSuffix(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl()) , true);
+                            new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), Tools.getFileNameWithSuffix(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl()), true);
 //                            new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), channelList.getResult().get(i).getAppList().get(0).getAppName()+".apk" , true);
 //                            new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), "tvvideo.apk" , true);
                         }
