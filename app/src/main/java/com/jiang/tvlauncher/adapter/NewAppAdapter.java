@@ -59,9 +59,9 @@ public class NewAppAdapter extends BaseAdapter {
         if (convertView == null) {
             mHolder = new Holder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_app, null);
-            mHolder.name = (TextView) convertView.findViewById(R.id.item_app_name);
-            mHolder.packagename = (TextView) convertView.findViewById(R.id.item_app_package_name);
-            mHolder.icon = (ImageView) convertView.findViewById(R.id.item_app_icon);
+            mHolder.name = convertView.findViewById(R.id.item_app_name);
+            mHolder.packagename = convertView.findViewById(R.id.item_app_package_name);
+            mHolder.icon = convertView.findViewById(R.id.item_app_icon);
             mHolder.bg = convertView.findViewById(R.id.item_app_bg);
             convertView.setTag(mHolder);
         } else {
@@ -70,7 +70,7 @@ public class NewAppAdapter extends BaseAdapter {
         final FindChannelList.ResultBean.AppListBean appBean = mAppBeanList.get(position);
 
         //判断程序有没有
-        if (Tools.isAppInstalled(appBean.getPackageName())) {
+        if (Tools.isAppInstalled_0(mContext, appBean.getPackageName())) {
             mHolder.icon.setImageDrawable(getAppIcon(appBean.getPackageName()));
         } else {
             mHolder.icon.setImageResource(R.drawable.feekr);

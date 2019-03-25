@@ -51,4 +51,10 @@ public class Const {
 //    public static String FilePath = Environment.getExternalStorageDirectory().getPath() + "/feekr/Download/";
     public static String FilePath = MyAPP.context.getFilesDir().getPath();
 
+
+    public static boolean Item_1_Isinstall;
+    public static boolean Item_2_Isinstall;
+    public static boolean Item_3_Isinstall;
+    public static boolean Item_4_Isinstall;
+
 }

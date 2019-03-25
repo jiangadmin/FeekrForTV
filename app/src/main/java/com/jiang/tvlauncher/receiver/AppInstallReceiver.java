@@ -29,6 +29,11 @@ public class AppInstallReceiver extends BroadcastReceiver {
             String packageName = intent.getData().getSchemeSpecificPart();
             Loading.dismiss();
             LogUtil.e(TAG, "安装成功");
+
+            Const.Item_1_Isinstall = false;
+            Const.Item_2_Isinstall = false;
+            Const.Item_3_Isinstall = false;
+            Const.Item_4_Isinstall = false;
             //如果之前被卸载过（应用自升级）
 //            if (!TextUtils.isEmpty(SaveUtils.getString(Const.包)))
 //                if (SaveUtils.getString(Const.包).contains(packageName)) {
@@ -52,6 +57,10 @@ public class AppInstallReceiver extends BroadcastReceiver {
             if (launchIntent != null) {
                 context.startActivity(launchIntent);
             }
+
+
+
+
         }
         //卸载
         if (intent.getAction().equals(Intent.ACTION_PACKAGE_REMOVED)) {

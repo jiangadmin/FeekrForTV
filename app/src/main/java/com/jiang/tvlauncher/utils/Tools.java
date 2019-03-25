@@ -51,7 +51,6 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@SuppressLint("DefaultLocale")
 public final class Tools {
     private static String TAG = "Tools";
 
@@ -342,7 +341,9 @@ public final class Tools {
 
         List<PackageInfo> packageInfos = manager.getInstalledPackages(0);
 
+        LogUtil.e(TAG, packagename);
         for (PackageInfo info : packageInfos) {
+            LogUtil.e(TAG, info.packageName);
             if (info.equals(packagename)) {
                 return true;
             }
@@ -350,6 +351,30 @@ public final class Tools {
 
         return false;
 
+    }
+
+
+    /**
+     * 判断APP有没有
+     *
+     * @param packagename
+     * @return
+     */
+    public static boolean isAppInstalled_0(Context context, String packagename) {
+        PackageInfo packageInfo;
+        try {
+            packageInfo = context.getPackageManager().getPackageInfo(packagename, 0);
+        } catch (Exception e) {
+            packageInfo = null;
+            e.printStackTrace();
+        }
+        if (packageInfo == null) {
+            //System.out.println("没有安装");
+            return false;
+        } else {
+            //System.out.println("已经安装");
+            return true;
+        }
     }
 
 
@@ -427,7 +452,7 @@ public final class Tools {
     public static void isAvilible(Context context, String packageName) {
         final PackageManager packageManager = context.getPackageManager();//获取packagemanager
         List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);//获取所有已安装程序的包信息
-        List<String> pName = new ArrayList<String>();//用于存储所有已安装程序的包名
+        List<String> pName = new ArrayList<>();//用于存储所有已安装程序的包名
         //从pinfo中将包名字逐一取出，压入pName list中
         if (pinfo != null) {
             for (int i = 0; i < pinfo.size(); i++) {

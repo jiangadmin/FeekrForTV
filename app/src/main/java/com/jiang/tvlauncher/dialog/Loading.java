@@ -24,6 +24,11 @@ public class Loading {
 
     private static LoadingDialog progressDialog;
 
+    public static void show(Activity activity, String message, boolean cancelable) {
+        show(activity,message);
+        progressDialog.setCancelable(cancelable);
+    }
+
     public static void show(Activity activity, String message) {
         if (activity != null) {
             if (!activity.isFinishing()) {
@@ -65,7 +70,7 @@ public class Loading {
                 message = "加载中...";
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.dialog_loading, null);
-            TextView txtInfo = (TextView) layout.findViewById(R.id.txt_info);
+            TextView txtInfo = layout.findViewById(R.id.txt_info);
             txtInfo.setText(message);
 
             LoadingDialog dialog = new LoadingDialog(context);

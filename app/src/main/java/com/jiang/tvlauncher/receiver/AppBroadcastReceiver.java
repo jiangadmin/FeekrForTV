@@ -31,7 +31,7 @@ public class AppBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String packname = Const.TvViedo;
         //验证是否有此应用
-        if (Tools.isAppInstalled(packname)) {
+        if (Tools.isAppInstalled_0(context,packname)) {
             //如果要启动定制版腾讯视频
             //判断是否已经运行
             if (!TextUtils.isEmpty(ShellUtils.execCommand("ps |grep com.ktcp.tvvideo:webview", false).successMsg)) {

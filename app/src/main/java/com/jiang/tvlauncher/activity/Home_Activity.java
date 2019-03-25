@@ -50,7 +50,6 @@ import com.jiang.tvlauncher.servlet.Update_Servlet;
 import com.jiang.tvlauncher.utils.FileUtils;
 import com.jiang.tvlauncher.utils.ImageUtils;
 import com.jiang.tvlauncher.utils.LogUtil;
-import com.jiang.tvlauncher.utils.RootCmd;
 import com.jiang.tvlauncher.utils.SaveUtils;
 import com.jiang.tvlauncher.utils.ShellUtils;
 import com.jiang.tvlauncher.utils.Tools;
@@ -135,8 +134,6 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
 
         initview();
         initeven();
-
-        LogUtil.e(TAG, RootCmd.haveRoot() + "");
 
         //判断网络
         if (!Tools.isNetworkConnected()) {
@@ -618,7 +615,7 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
                             Const.云视听Url = channelList.getResult().get(i).getAppList().get(0).getDownloadUrlBak();
                         }
                         //验证是否有此应用
-                        if (Tools.isAppInstalled(packname)) {
+                        if (Tools.isAppInstalled_0(this, packname)) {
                             //如果要启动定制版腾讯视频
                             if (packname.equals(Const.TvViedo)) {
 
@@ -635,10 +632,40 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
                             }
                         } else {
 
-                            Loading.show(this, "请稍后");
+                            switch (i) {
+                                case 0:
+                                    if (Const.Item_1_Isinstall) {
+                                        Toast.makeText(this, "正在安装中，请稍后", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    Const.Item_1_Isinstall = true;
+                                    break;
+                                case 1:
+                                    if (Const.Item_2_Isinstall) {
+                                        Toast.makeText(this, "正在安装中，请稍后", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    Const.Item_2_Isinstall = true;
+                                    break;
+                                case 2:
+                                    if (Const.Item_3_Isinstall) {
+                                        Toast.makeText(this, "正在安装中，请稍后", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    Const.Item_3_Isinstall = true;
+                                    break;
+                                case 3:
+                                    if (Const.Item_4_Isinstall) {
+                                        Toast.makeText(this, "正在安装中，请稍后", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    Const.Item_4_Isinstall = true;
+                                    break;
+
+                            }
+
+                            Loading.show(this, "请稍后", false);
                             new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), Tools.getFileNameWithSuffix(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl()), true);
-//                            new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), channelList.getResult().get(i).getAppList().get(0).getAppName()+".apk" , true);
-//                            new DownUtil().downLoad(channelList.getResult().get(i).getAppList().get(0).getDownloadUrl(), "tvvideo.apk" , true);
                         }
                     } else
                         Toast.makeText(this, "栏目未开通", Toast.LENGTH_SHORT).show();
