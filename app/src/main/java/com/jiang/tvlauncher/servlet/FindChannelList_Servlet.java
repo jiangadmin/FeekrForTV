@@ -48,9 +48,15 @@ public class FindChannelList_Servlet extends AsyncTask<String, Integer, FindChan
         map.put("devId", SaveUtils.getString(Save_Key.ID));
         res = HttpUtil.doPost(Const.URL + "cms/channelController/findChannelList.do", map);
 
-        LogUtil.e(TAG, "⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩栏目信息⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩");
+        LogUtil.e(TAG, "╔═════════════════════════════════════════════╗");
+        LogUtil.e(TAG, "║               ╔═════════════╗               ║");
+        LogUtil.e(TAG, "║               ║ ╔═════════╗ ║               ║");
+        LogUtil.e(TAG, "╠═══════════════╣ ║ 栏目信息 ║ ╠═══════════════╣");
+        LogUtil.e(TAG, "║               ║ ╚═════════╝ ║               ║");
+        LogUtil.e(TAG, "║               ╚═════════════╝               ║");
+        LogUtil.e(TAG, "╚═════════════════════════════════════════════╝");
+
         LogUtil.e(TAG, res);
-        LogUtil.e(TAG, "⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧");
 
         if (TextUtils.isEmpty(res)) {
             channelList = new FindChannelList();

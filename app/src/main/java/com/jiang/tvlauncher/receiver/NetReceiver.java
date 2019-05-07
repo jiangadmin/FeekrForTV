@@ -27,6 +27,15 @@ public class NetReceiver extends BroadcastReceiver {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
             NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+            LogUtil.e(TAG, "╔═════════════════════════════════════════════╗");
+            LogUtil.e(TAG, "║               ╔═════════════╗               ║");
+            LogUtil.e(TAG, "║               ║ ╔═════════╗ ║               ║");
+            LogUtil.e(TAG, "╠═══════════════╣ ║ 网络变化 ║ ╠═══════════════╣");
+            LogUtil.e(TAG, "║               ║ ╚═════════╝ ║               ║");
+            LogUtil.e(TAG, "║               ╚═════════════╝               ║");
+            LogUtil.e(TAG, "╚═════════════════════════════════════════════╝");
+
             if (networkInfo != null && networkInfo.isAvailable()) {
                 if (networkInfo.getType() == ConnectivityManager.TYPE_ETHERNET) {
                     LogUtil.e(TAG, "有线网络");

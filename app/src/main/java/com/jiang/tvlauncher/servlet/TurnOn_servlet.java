@@ -56,9 +56,17 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
 
         String res = HttpUtil.doPost(Const.URL + "dev/devTurnOffController/turnOn.do", map);
 
-        LogUtil.e(TAG, "⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩开机接口⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩⇩");
+        LogUtil.e(TAG, "╔═════════════════════════════════════════════╗");
+        LogUtil.e(TAG, "║                                             ║");
+        LogUtil.e(TAG, "║                 ╔═════════╗                 ║");
+        LogUtil.e(TAG, "╠═════════════════╣ 开机接口 ╠═════════════════╣");
+        LogUtil.e(TAG, "║                 ╚═════════╝                 ║");
+        LogUtil.e(TAG, "║                                             ║");
+        LogUtil.e(TAG, "╚═════════════════════════════════════════════╝");
+
+
         LogUtil.e(TAG, res);
-        LogUtil.e(TAG, "⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧⇧");
+
 
         if (TextUtils.isEmpty(res)) {
             model = new TurnOn_Model();

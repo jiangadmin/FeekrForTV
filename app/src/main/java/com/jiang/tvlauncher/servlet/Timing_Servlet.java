@@ -10,6 +10,7 @@ import com.jiang.tvlauncher.entity.MonitorRes_Model;
 import com.jiang.tvlauncher.entity.Save_Key;
 import com.jiang.tvlauncher.utils.FileUtils;
 import com.jiang.tvlauncher.utils.HttpUtil;
+import com.jiang.tvlauncher.utils.LogUtil;
 import com.jiang.tvlauncher.utils.SaveUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -26,6 +27,7 @@ import java.util.Map;
  * update：
  */
 public class Timing_Servlet extends AsyncTask<String, Integer, MonitorRes_Model> {
+    private static final String TAG = "Timing_Servlet";
 
     @Override
     protected MonitorRes_Model doInBackground(String... infos) {
@@ -39,6 +41,15 @@ public class Timing_Servlet extends AsyncTask<String, Integer, MonitorRes_Model>
         map.put("fanSpeed", String.valueOf(MyAPP.WindSpeed));
 
         String res = HttpUtil.doPost(Const.URL + "dev/devRunStateController/monitorRunState.do", map);
+
+        LogUtil.e(TAG, "╔═════════════════════════════════════════════╗");
+        LogUtil.e(TAG, "║               ╔═════════════╗               ║");
+        LogUtil.e(TAG, "║               ║ ╔═════════╗ ║               ║");
+        LogUtil.e(TAG, "╠═══════════════╣ ║ 心跳发送 ║ ╠═══════════════╣");
+        LogUtil.e(TAG, "║               ║ ╚═════════╝ ║               ║");
+        LogUtil.e(TAG, "║               ╚═════════════╝               ║");
+        LogUtil.e(TAG, "╚═════════════════════════════════════════════╝");
+
         MonitorRes_Model entity;
         if (res != null) {
             try {

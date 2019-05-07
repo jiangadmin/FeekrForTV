@@ -11,6 +11,7 @@ import com.jiang.tvlauncher.dialog.Loading;
 import com.jiang.tvlauncher.entity.Const;
 import com.jiang.tvlauncher.entity.Update_Model;
 import com.jiang.tvlauncher.utils.HttpUtil;
+import com.jiang.tvlauncher.utils.LogUtil;
 import com.jiang.tvlauncher.utils.Tools;
 
 import java.util.HashMap;
@@ -40,6 +41,14 @@ public class Update_Servlet extends AsyncTask<String, Integer, Update_Model> {
         map.put("buildNum", String.valueOf(Tools.getVersionCode(MyAPP.context)));
 
         String res = HttpUtil.doPost(Const.URL + "cms/appVersionController/findNewVersion.do", map);
+
+        LogUtil.e(TAG, "╔═════════════════════════════════════════════╗");
+        LogUtil.e(TAG, "║               ╔═════════════╗               ║");
+        LogUtil.e(TAG, "║               ║ ╔═════════╗ ║               ║");
+        LogUtil.e(TAG, "╠═══════════════╣ ║ 检查更新 ║ ╠═══════════════╣");
+        LogUtil.e(TAG, "║               ║ ╚═════════╝ ║               ║");
+        LogUtil.e(TAG, "║               ╚═════════════╝               ║");
+        LogUtil.e(TAG, "╚═════════════════════════════════════════════╝");
 
         Update_Model entity;
         if (res != null) {

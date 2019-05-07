@@ -97,7 +97,6 @@ public class MyAPP extends Application implements KtcpPaySDKCallback {
         //开机请求
         new TurnOn_servlet(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-
     }
 
     ServiceConnection serviceConnection = new ServiceConnection() {
