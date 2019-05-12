@@ -39,13 +39,13 @@ public class Get_Theme_Servlet extends AsyncTask<String, Integer, Theme_Model> {
 
         res = HttpUtil.doPost(Const.URL + "cms/themeController/findLauncherTheme.do", map);
 
-        LogUtil.e(TAG, "╔═════════════════════════════════════════════╗");
-        LogUtil.e(TAG, "║               ╔═════════════╗               ║");
-        LogUtil.e(TAG, "║               ║ ╔═════════╗ ║               ║");
-        LogUtil.e(TAG, "╠═══════════════╣ ║ 主题信息 ║ ╠═══════════════╣");
-        LogUtil.e(TAG, "║               ║ ╚═════════╝ ║               ║");
-        LogUtil.e(TAG, "║               ╚═════════════╝               ║");
-        LogUtil.e(TAG, "╚═════════════════════════════════════════════╝");
+        LogUtil.e(TAG, "╔═════════════════════════╗");
+        LogUtil.e(TAG, "║              ╔════════╗                ║");
+        LogUtil.e(TAG, "║              ║ ╔═════╗ ║                ║");
+        LogUtil.e(TAG, "╠═══════╣ ║ 主题信息 ║ ╠════════╣");
+        LogUtil.e(TAG, "║              ║ ╚═════╝ ║                ║");
+        LogUtil.e(TAG, "║              ╚════════╝                ║");
+        LogUtil.e(TAG, "╚═════════════════════════╝");
 
         LogUtil.e(TAG, res);
 

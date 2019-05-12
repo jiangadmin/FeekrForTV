@@ -56,13 +56,13 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
 
         String res = HttpUtil.doPost(Const.URL + "dev/devTurnOffController/turnOn.do", map);
 
-        LogUtil.e(TAG, "╔═════════════════════════════════════════════╗");
-        LogUtil.e(TAG, "║                                             ║");
-        LogUtil.e(TAG, "║                 ╔═════════╗                 ║");
-        LogUtil.e(TAG, "╠═════════════════╣ 开机接口 ╠═════════════════╣");
-        LogUtil.e(TAG, "║                 ╚═════════╝                 ║");
-        LogUtil.e(TAG, "║                                             ║");
-        LogUtil.e(TAG, "╚═════════════════════════════════════════════╝");
+        LogUtil.e(TAG, "╔═════════════════════════╗");
+        LogUtil.e(TAG, "║              ╔════════╗                ║");
+        LogUtil.e(TAG, "║              ║ ╔═════╗ ║                ║");
+        LogUtil.e(TAG, "╠═══════╣ ║ 开机接口 ║ ╠════════╣");
+        LogUtil.e(TAG, "║              ║ ╚═════╝ ║                ║");
+        LogUtil.e(TAG, "║              ╚════════╝                ║");
+        LogUtil.e(TAG, "╚═════════════════════════╝");
 
 
         LogUtil.e(TAG, res);
@@ -156,6 +156,9 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
             if (Tools.isLineConnected() && shadowcnfBean != null
                     && shadowcnfBean.getHotPointFlag() == 1) {
 
+                //首先关闭热点
+                new Wifi_APManager(context).closeWifiAp();
+
                 //获取热点名称&热点密码
                 String SSID = shadowcnfBean.getWifi();
                 String APPWD = shadowcnfBean.getWifiPassword();
@@ -165,9 +168,6 @@ public class TurnOn_servlet extends AsyncTask<String, Integer, TurnOn_Model> {
                 SaveUtils.setString(Save_Key.WiFiPwd, APPWD);
 
                 LogUtil.e(TAG, "SSID:" + SSID + "  PassWord:" + APPWD);
-
-                //首先关闭热点
-                new Wifi_APManager(context).closeWifiAp();
 
                 if (shadowcnfBean.getHotPoint() == 1
                         && shadowcnfBean.getWifi() != null

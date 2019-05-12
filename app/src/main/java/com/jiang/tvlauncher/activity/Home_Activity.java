@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -676,7 +678,8 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
                     break;
                 //启动展示图片
                 case 3:
-                    Image_Activity.start(this, channelList.getResult().get(i).getContentUrl());
+                    openWithHomePageUri();
+//                    Image_Activity.start(this, channelList.getResult().get(i).getContentUrl());
                     break;
                 //启动展示视频
                 case 4:
@@ -715,6 +718,30 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
                 }
                 break;
         }
+    }
+
+    private void handleIntent(Intent intent) {
+        // 隐式调用的方式startActivity
+        intent.setAction("com.tencent.qqlivetv.open");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setPackage("com.ktcp.tvvideo");//设置视频包名，要先确认包名
+        PackageManager packageManager = getPackageManager();
+        List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
+        boolean isIntentSafe = activities.size() > 0;
+        if (isIntentSafe) {
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "未安装腾讯视频 ， 无法跳转", Toast.LENGTH_SHORT)
+                    .show();
+        }
+    }
+
+    private void openWithHomePageUri() {
+        Intent intent = new Intent();
+//        intent.setData(Uri.parse("tenvideo2://?action=1&cover_id=92g9l8wyg3sj5cr"));
+        intent.setData(Uri.parse("tenvideo2://?action=7&video_id=&video_name=&cover_id=92g9l8wyg3sj5cr&is_child_mode=0&cover_index="));
+
+        handleIntent(intent);
     }
 
     /**
@@ -787,4 +814,6 @@ public class Home_Activity extends Base_Activity implements View.OnClickListener
             setCancelable(false);
         }
     }
+
+
 }

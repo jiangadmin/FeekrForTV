@@ -36,13 +36,14 @@ public class VIPCallBack_Servlet extends AsyncTask<VIPCallBack_Servlet.TencentVi
 
         String res = HttpUtil.doPost(Const.URL + "tencent/tencentVideoController/tencentNoticeCallBack.do", map);
 
-        LogUtil.e(TAG, "╔═════════════════════════════════════════════╗");
-        LogUtil.e(TAG, "║               ╔═════════════╗               ║");
-        LogUtil.e(TAG, "║               ║ ╔═════════╗ ║               ║");
-        LogUtil.e(TAG, "╠═══════════════╣ ║ 会员反馈 ║ ╠═══════════════╣");
-        LogUtil.e(TAG, "║               ║ ╚═════════╝ ║               ║");
-        LogUtil.e(TAG, "║               ╚═════════════╝               ║");
-        LogUtil.e(TAG, "╚═════════════════════════════════════════════╝");
+        LogUtil.e(TAG, "╔═════════════════════════╗");
+        LogUtil.e(TAG, "║              ╔════════╗                ║");
+        LogUtil.e(TAG, "║              ║ ╔═════╗ ║                ║");
+        LogUtil.e(TAG, "╠═══════╣ ║ 会员反馈 ║ ╠════════╣");
+        LogUtil.e(TAG, "║              ║ ╚═════╝ ║                ║");
+        LogUtil.e(TAG, "║              ╚════════╝                ║");
+        LogUtil.e(TAG, "╚═════════════════════════╝");
+
 
         Base_Model entity;
         if (TextUtils.isEmpty(res)) {

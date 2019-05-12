@@ -50,13 +50,14 @@ public class GetVIP_Servlet extends AsyncTask<String, Integer, VIP_Model> {
 
         String res = HttpUtil.doPost(Const.URL + "tencent/tencentVideoController/getVuidInfo.do", map);
 
-        LogUtil.e(TAG, "╔═════════════════════════════════════════════╗");
-        LogUtil.e(TAG, "║               ╔═════════════╗               ║");
-        LogUtil.e(TAG, "║               ║ ╔═════════╗ ║               ║");
-        LogUtil.e(TAG, "╠═══════════════╣ ║ 会员数据 ║ ╠═══════════════╣");
-        LogUtil.e(TAG, "║               ║ ╚═════════╝ ║               ║");
-        LogUtil.e(TAG, "║               ╚═════════════╝               ║");
-        LogUtil.e(TAG, "╚═════════════════════════════════════════════╝");
+        LogUtil.e(TAG, "╔═════════════════════════╗");
+        LogUtil.e(TAG, "║              ╔════════╗                ║");
+        LogUtil.e(TAG, "║              ║ ╔═════╗ ║                ║");
+        LogUtil.e(TAG, "╠═══════╣ ║ 会员数据 ║ ╠════════╣");
+        LogUtil.e(TAG, "║              ║ ╚═════╝ ║                ║");
+        LogUtil.e(TAG, "║              ╚════════╝                ║");
+        LogUtil.e(TAG, "╚═════════════════════════╝");
+
 
         LogUtil.e(TAG, res);
 

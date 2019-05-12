@@ -42,13 +42,13 @@ public class Update_Servlet extends AsyncTask<String, Integer, Update_Model> {
 
         String res = HttpUtil.doPost(Const.URL + "cms/appVersionController/findNewVersion.do", map);
 
-        LogUtil.e(TAG, "╔═════════════════════════════════════════════╗");
-        LogUtil.e(TAG, "║               ╔═════════════╗               ║");
-        LogUtil.e(TAG, "║               ║ ╔═════════╗ ║               ║");
-        LogUtil.e(TAG, "╠═══════════════╣ ║ 检查更新 ║ ╠═══════════════╣");
-        LogUtil.e(TAG, "║               ║ ╚═════════╝ ║               ║");
-        LogUtil.e(TAG, "║               ╚═════════════╝               ║");
-        LogUtil.e(TAG, "╚═════════════════════════════════════════════╝");
+        LogUtil.e(TAG, "╔═════════════════════════╗");
+        LogUtil.e(TAG, "║              ╔════════╗                ║");
+        LogUtil.e(TAG, "║              ║ ╔═════╗ ║                ║");
+        LogUtil.e(TAG, "╠═══════╣ ║ 检查更新 ║ ╠════════╣");
+        LogUtil.e(TAG, "║              ║ ╚═════╝ ║                ║");
+        LogUtil.e(TAG, "║              ╚════════╝                ║");
+        LogUtil.e(TAG, "╚═════════════════════════╝");
 
         Update_Model entity;
         if (res != null) {

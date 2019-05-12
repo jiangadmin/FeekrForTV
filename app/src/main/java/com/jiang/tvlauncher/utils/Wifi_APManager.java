@@ -82,17 +82,10 @@ public class Wifi_APManager {
             method1.invoke(mWifiManager, netConfig, true);
 
 
-        } catch (NoSuchMethodException e) {
+        } catch (Exception e) {
 
             e.printStackTrace();
-
-        } catch (InvocationTargetException e) {
-
-            e.printStackTrace();
-
-        } catch (IllegalAccessException e) {
-
-            e.printStackTrace();
+            LogUtil.e(TAG, e.getMessage());
 
         }
 
